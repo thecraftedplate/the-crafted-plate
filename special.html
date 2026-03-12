@@ -2,335 +2,276 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Special Feature | Beef Lasagna | The Crafted Plate</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crafted Plate | Special</title>
+<link rel="icon" href="favicon.png.png" type="image/png">
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-    body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-image: url('background-image-2.png.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #fff;
-        }
-    body {
-    transition: opacity 0.3s ease;
+
+/* Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-    header {
-        background: #000;
-        padding: 20px;
-        text-align: center;
-        border-bottom: 1px solid #d4af37;
-    }
-    
-        .logo {
-            width: 200px;
-            height: 100px;
-            object-fit: contain;
-            transition: 0.3s ease;
-        }
-        .logo:hover {
-            box-shadow: 0 0 35px rgba(212, 175, 55, 0.4);
-            transform: scale(1.05);
-        }
+/* Body */
+body{
+font-family:'Montserrat', sans-serif;
+color:#f0f0f0;
+background:url('background-image-2.png.png') no-repeat center center fixed;
+background-size:cover;
+overflow-x:hidden;
+}
 
-    header h1 {
-        font-family: 'Playfair Display', serif;
-        color: #d4af37;
-        font-size: 28px;
-        margin: 0;
-    }
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
 
-    nav {
-        background: #111;
-        padding: 10px;
-        text-align: center;
-        border-bottom: 1px solid #d4af37;
-    }
+/* Header */
 
-    nav a {
-        color: #f5f5f5;
-        text-decoration: none;
-        margin: 0 12px;
-        font-size: 14px;
-        transition: 0.3s;
-    }
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 60px;
+}
 
-    nav a:hover {
-        color: #d4af37;
-    }
+.logo{
+font-family:'Cinzel', serif;
+font-size:32px;
+letter-spacing:3px;
+}
 
-    .container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 30px;
-         background: rgba(20, 20, 20, 0.9);
-        border: 1px solid #d4af37;
-        border-radius: 20px;
-        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
-    }
+/* Dropdown */
 
-    h2 {
-        font-family: 'Playfair Display', serif;
-        color: #d4af37;
-        margin-bottom: 15px;
-    }
+nav{
+position:relative;
+}
 
-    .featured-badge {
-        display: inline-block;
-        padding: 6px 12px;
-        border: 1px solid #d4af37;
-        border-radius: 20px;
-        font-size: 12px;
-        margin-bottom: 15px;
-        color: #d4af37;
-    }
+nav button{
+background:rgba(30,30,30,0.85);
+color:#f0f0f0;
+font-size:16px;
+padding:10px 20px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-family:'Montserrat', sans-serif;
+}
 
-    .recipe-image {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        margin: 20px 0;
-        border: 1px solid #d4af37;
-    }
+nav button:hover{
+background:rgba(30,30,30,1);
+}
 
-    .accordion {
-        background-color: #141414;
-        color: #d4af37;
-        cursor: pointer;
-        padding: 15px 20px;
-        width: 100%;
-        border: 1px solid #d4af37;
-        border-radius: 15px;
-        text-align: left;
-        outline: none;
-        font-size: 16px;
-        transition: 0.3s;
-        margin-bottom: 15px;
-    }
+.dropdown-content{
+display:none;
+position:absolute;
+right:0;
+background:rgba(30,30,30,0.95);
+min-width:160px;
+border-radius:12px;
+overflow:hidden;
+margin-top:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
+}
 
-    .accordion:hover, .accordion.active {
-        background-color: #1a1a1a;
-    }
+.dropdown-content a{
+display:block;
+color:#f0f0f0;
+text-decoration:none;
+padding:12px 20px;
+font-size:15px;
+transition:0.3s;
+}
 
-    .panel {
-        padding: 0 15px 15px 15px;
-        display: none;
-        background-color: #141414;
-        overflow: hidden;
-        border-left: 1px solid #d4af37;
-        border-right: 1px solid #d4af37;
-        border-bottom: 1px solid #d4af37;
-        border-radius: 0 0 15px 15px;
-    }
+.dropdown-content a:hover{
+background:rgba(50,50,50,0.9);
+}
 
-    .panel p, .panel ul, .panel ol {
-        color: #ddd;
-        font-size: 14px;
-    }
+/* Special Card */
 
-    .cta-button {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 25px;
-        border: 1px solid #d4af37;
-        border-radius: 25px;
-        text-decoration: none;
-        color: #d4af37;
-        transition: 0.3s;
-        font-size: 14px;
-    }
+.special{
+max-width:600px;
+margin:90px auto;
+padding:25px;
+background:rgba(30,30,30,0.85);
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.6);
+text-align:center;
+}
 
-    .cta-button:hover {
-        background: #d4af37;
-        color: #000;
-    }
+/* Title */
 
-    footer {
-        background: #000;
-        text-align: center;
-        padding: 20px;
-        border-top: 1px solid #d4af37;
-        margin-top: 40px;
-    }
+.special h1{
+font-family:'Cinzel', serif;
+font-size:34px;
+margin-bottom:10px;
+}
 
-    footer a {
-        color: #d4af37;
-        text-decoration: none;
-    }
+.special p{
+font-size:16px;
+color:#ccc;
+margin-bottom:20px;
+}
 
-    footer p {
-        margin: 0;
-        font-size: 13px;
-        color: #aaa;
-    }
+/* Image */
 
-    /* MOBILE RESPONSIVE */
-    @media (max-width: 768px) {
-        header h1 {
-            font-size: 24px;
-        }
+.special img{
+width:100%;
+max-height:260px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:20px;
+}
 
-        nav a {
-            display: block;
-            margin: 8px 0;
-        }
+/* Recipe Content */
 
-        .container {
-            padding: 20px;
-            margin: 20px;
-        }
+.recipe-box{
+text-align:left;
+}
 
-        .accordion {
-            font-size: 15px;
-            padding: 12px 15px;
-        }
+.recipe-box h3{
+font-family:'Cinzel', serif;
+margin-bottom:8px;
+margin-top:15px;
+}
 
-        .panel p, .panel ul, .panel ol {
-            font-size: 13px;
-        }
+.recipe-box ul,
+.recipe-box ol{
+margin-left:20px;
+line-height:1.7;
+color:#ccc;
+}
 
-        .cta-button {
-            font-size: 13px;
-            padding: 8px 20px;
-        }
-    }
+/* Footer */
+
+footer{
+text-align:center;
+padding:30px;
+font-size:14px;
+color:#ccc;
+margin-top:60px;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+header{
+padding:20px;
+}
+
+.special{
+margin:60px 20px;
+}
+
+.special h1{
+font-size:28px;
+}
+
+}
+
 </style>
 </head>
+
 <body>
+
 <header>
-    <img src="The-crafted-plate.png.png" alt="The Crafted Plate Logo" class="logo">
-<h1>The Crafted Plate</h1>
-</header>
+
+<div class="logo">The Crafted Plate</div>
 
 <nav>
 
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="recipes.html">Recipes</a>
-    <a href="special.html">Special</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy Policy</a>
-</nav>
+<button onclick="toggleDropdown()">Menu &#9662;</button>
 
-<div class="container">
+<div class="dropdown-content" id="dropdown">
 
-    <div class="featured-badge">Chef’s Special Feature</div>
-
-    <h2>Classic Beef Lasagna</h2>
-    <p>Rich, layered, and comforting — click below to reveal the full recipe!</p>
-
-    <img src="beef-lasagna.png.png" alt="Classic Beef Lasagna" class="recipe-image">
-
-    <button class="accordion">click to reveal the recipe</button>
-    <div class="panel">
-        <h3>Ingredients</h3>
-        <ul>
-            <li>500g ground beef</li>
-            <li>1 onion, finely chopped</li>
-            <li>2 cloves garlic, minced</li>
-            <li>2 cups tomato sauce</li>
-            <li>2 tbsp tomato paste</li>
-            <li>1 tsp dried oregano</li>
-            <li>1 tsp dried basil</li>
-            <li>Salt & black pepper to taste</li>
-            <li>9 lasagna sheets</li>
-            <li>2 cups ricotta cheese</li>
-            <li>2 cups shredded mozzarella</li>
-            <li>½ cup grated parmesan</li>
-        </ul>
-
-        <h3>Instructions</h3>
-        <ol>
-            <li>Sauté onion and garlic until fragrant.</li>
-            <li>Add ground beef and cook until browned.</li>
-            <li>Stir in tomato sauce, tomato paste, oregano, basil, salt, and pepper. Simmer 20 minutes.</li>
-            <li>Preheat oven to 180°C (350°F).</li>
-            <li>Layer baking dish: meat sauce, lasagna sheets, ricotta, mozzarella. Repeat layers.</li>
-            <li>Top with mozzarella and parmesan.</li>
-            <li>Bake 35–40 minutes until golden and bubbling.</li>
-            <li>Rest 10 minutes before slicing.</li>
-        </ol>
-
-        <h3>Serving Suggestion</h3>
-        <p>Serve with a fresh green salad and warm garlic bread for a restaurant-quality experience at home.</p>
-    </div>
-
-    <a href="recipes.html" class="cta-button">Explore More Recipes</a>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="recipes.html">Recipes</a>
+<a href="special.html">Special</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy Policy</a>
 
 </div>
 
+</nav>
+
+</header>
+
+
+<section class="special">
+
+<h1>Chef's Special</h1>
+
+<p>This week’s featured recipe selected for The Crafted Plate.</p>
+
+<img src="beef-lasagna.png.png" alt="Beef Lasagna">
+
+<div class="recipe-box">
+
+<h3>Ingredients</h3>
+
+<ul>
+<li>500g ground beef</li>
+<li>1 onion, chopped</li>
+<li>2 cloves garlic</li>
+<li>2 cups tomato sauce</li>
+<li>9 lasagna sheets</li>
+<li>2 cups ricotta cheese</li>
+<li>2 cups mozzarella</li>
+<li>½ cup parmesan</li>
+</ul>
+
+<h3>Instructions</h3>
+
+<ol>
+<li>Sauté onion and garlic.</li>
+<li>Add beef and cook until browned.</li>
+<li>Stir in tomato sauce and simmer 15 minutes.</li>
+<li>Layer pasta, sauce, and cheese in a baking dish.</li>
+<li>Repeat layers and finish with mozzarella.</li>
+<li>Bake at 180°C for 35–40 minutes.</li>
+<li>Let rest before slicing and serving.</li>
+</ol>
+
+</div>
+
+</section>
+
+
 <footer>
-    <p>&copy; 2026 The Crafted Plate | <a href="privacy.html">Privacy Policy</a></p>
+
+© 2026 The Crafted Plate
+
 </footer>
 
+
 <script>
-    const accordions = document.querySelectorAll(".accordion");
-    accordions.forEach(acc => {
-        acc.addEventListener("click", function() {
-            this.classList.toggle("active");
-            const panel = this.nextElementSibling;
-            panel.style.display = panel.style.display === "block" ? "none" : "block";
-        });
-    });
+
+function toggleDropdown(){
+
+const dropdown = document.getElementById("dropdown");
+
+dropdown.style.display =
+dropdown.style.display === "block"
+? "none"
+: "block";
+
+}
+
 </script>
 
 </body>
 </html>
-<script>
-let startX = 0;
-let endX = 0;
-
-// Detect touch start
-document.addEventListener("touchstart", function(e) {
-    startX = e.changedTouches[0].screenX;
-});
-
-// Detect touch end
-document.addEventListener("touchend", function(e) {
-    endX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const currentPage = window.location.pathname.split("/").pop();
-
-    // Swipe left
-    if (endX < startX - 50) {
-
-        if (currentPage === "index.html") {
-            window.location.href = "special.html";
-        }
-
-        else if (currentPage === "special.html") {
-            window.location.href = "recipes.html";
-        }
-    }
-
-    // Swipe right
-    if (endX > startX + 50) {
-
-        if (currentPage === "special.html") {
-            window.location.href = "index.html";
-        }
-
-        else if (currentPage === "recipes.html") {
-            window.location.href = "special.html";
-        }
-    }
-}
-</script>
-
-
-
-
-
-
 
