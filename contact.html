@@ -4,136 +4,129 @@
 <meta charset="UTF-8">
 <title>Contact | The Crafted Plate</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="favicon.png.png" type="image/png">
-<!-- Elegant Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.png.png" type="image/png">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* BODY */
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-image: url('background-image.png.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: #fff;
+  font-family:'Montserrat', sans-serif;
+  color:#f0f0f0;
+  background: url('background-image-2.png.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x:hidden;
 }
-     body {
-    transition: opacity 0.3s ease;
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.55);
+  z-index:-1;
 }
 
-/* Header & Logo */
+/* HEADER */
 header {
-    background: #000;
-    padding: 20px 20px;
-    text-align: center;
-    border-bottom: 1px solid #d4af37;
-    border-radius: 20px;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:25px 60px;
+}
+.logo {
+  font-family:'Cinzel', serif; font-size:32px; letter-spacing:3px;
 }
 
-header img.logo {
-    width: 200px;
-    height: 100px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 10px;
-    transition: 0.3s ease;
+/* NAV */
+nav { position:relative; }
+nav button {
+  background:rgba(30,30,30,0.85);
+  color:#f0f0f0;
+  font-size:16px;
+  padding:10px 20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:'Montserrat', sans-serif;
 }
-
-header img.logo:hover {
-    box-shadow: 0 0 35px rgba(212, 175, 55, 0.4);
-    transform: scale(1.05);
+nav button:hover { background:rgba(30,30,30,1); }
+.dropdown-content {
+  display:none;
+  position:absolute;
+  right:0;
+  background:rgba(30,30,30,0.95);
+  min-width:160px;
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.5);
 }
-
-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    color: #d4af37;
-    margin: 0;
+.dropdown-content a {
+  display:block;
+  color:#f0f0f0;
+  text-decoration:none;
+  padding:12px 20px;
+  font-size:15px;
+  transition:0.3s;
 }
+.dropdown-content a:hover { background:rgba(50,50,50,0.9); }
 
-/* Nav */
-nav {
-    background: #111;
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #d4af37;
+/* CONTACT CARD */
+.contact-card {
+  max-width:700px;
+  margin:80px auto;
+  background:rgba(30,30,30,0.9);
+  padding:40px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.7);
 }
-
-nav a {
-    color: #f5f5f5;
-    text-decoration: none;
-    margin: 0 20px;
-    transition: 0.3s;
+.contact-card h1 {
+  font-family:'Cinzel', serif;
+  font-size:32px;
+  text-align:center;
+  margin-bottom:20px;
 }
-
-nav a:hover {
-    color: #d4af37;
+.contact-card p { color:#ccc; line-height:1.7; margin-bottom:20px; }
+.contact-card form { display:flex; flex-direction:column; gap:15px; }
+.contact-card input, .contact-card textarea {
+  padding:12px 15px;
+  border-radius:12px;
+  border:none;
+  background: rgba(50,50,50,0.85);
+  color:#f0f0f0;
+  font-family:'Montserrat', sans-serif;
+  font-size:14px;
+  resize:none;
 }
-
-/* Contact Section */
-.contact-section {
-    max-width: 600px;
-    margin: 50px auto;
-    background: rgba(20, 20, 20, 0.9);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid #d4af37;
+.contact-card input::placeholder, .contact-card textarea::placeholder {
+  color:#aaa;
 }
-
-.contact-section h2 {
-    font-family: 'Playfair Display', serif;
-    color: #d4af37;
-    text-align: center;
-    margin-bottom: 30px;
+.contact-card button {
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#7e7e7e;
+  color:#000;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
 }
+.contact-card button:hover { background:#e0e0e0; }
 
-.contact-section p {
-    font-size: 18px;
-    color: #f5f5f5;
-    margin-bottom: 20px;
-}
-
-.contact-section a {
-    color: #d4af37;
-    text-decoration: none;
-}
-
-.contact-section a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
+/* FOOTER */
 footer {
-    background: #000;
-    text-align: center;
-    padding: 25px;
-    border-top: 1px solid #d4af37;
+  text-align:center;
+  padding:30px;
+  font-size:14px;
+  color:#ccc;
+  margin-top:40px;
 }
 
-footer a {
-    color: #d4af37;
-    text-decoration: none;
-}
-
-footer p {
-    margin: 0;
-    font-size: 14px;
-    color: #aaa;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    nav a {
-        display: block;
-        margin: 10px 0;
-    }
-
-    .contact-section {
-        margin: 30px 20px;
-        padding: 30px;
-    }
+/* MOBILE */
+@media(max-width:768px){
+  header { padding:20px; }
+  .contact-card { margin:60px 20px; padding:30px; }
 }
 </style>
 </head>
@@ -141,73 +134,42 @@ footer p {
 <body>
 
 <header>
-    <img src="The-crafted-plate.png.png" alt="The Crafted Plate Logo" class="logo">
-    <h1>The Crafted Plate - Contact</h1>
+<div class="logo">The Crafted Plate</div>
+<nav>
+<button onclick="toggleDropdown()">Menu &#9662;</button>
+<div class="dropdown-content" id="dropdown">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="recipes.html">Recipes</a>
+<a href="special.html">Special</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy Policy</a>
+</div>
+</nav>
 </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="recipes.html">Recipes</a>
-    <a href="special.html">Special</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy Policy</a>
-</nav>
+<section class="contact-card">
+<h1>Contact Us</h1>
+<p>We would love to hear from you! Fill out the form below and we will get back to you as soon as possible.</p>
 
-<section class="contact-section">
-    <h2>Get in Touch</h2>
-    <p>We would love to hear from you! For inquiries, collaborations, or suggestions, reach out to us at:</p>
-    <p>Email: <a href="mailto:jaymurimiq@gmail.com">jaymurimiq@gmail.com</a></p>
+<form action="https://formspree.io/f/xreykqaz" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="_replyto" placeholder="Your Email" required>
+  <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+  <button type="submit">Send Message</button>
+</form>
 </section>
 
 <footer>
-    <p>&copy; 2026 The Crafted Plate. All Rights Reserved.</p>
+© 2026 The Crafted Plate
 </footer>
 
-</body>
-</html>
 <script>
-let startX = 0;
-let endX = 0;
-
-// Detect touch start
-document.addEventListener("touchstart", function(e) {
-    startX = e.changedTouches[0].screenX;
-});
-
-// Detect touch end
-document.addEventListener("touchend", function(e) {
-    endX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const currentPage = window.location.pathname.split("/").pop();
-
-    // Swipe left
-    if (endX < startX - 50) {
-
-        if (currentPage === "index.html") {
-            window.location.href = "special.html";
-        }
-
-        else if (currentPage === "special.html") {
-            window.location.href = "recipes.html";
-        }
-    }
-
-    // Swipe right
-    if (endX > startX + 50) {
-
-        if (currentPage === "special.html") {
-            window.location.href = "index.html";
-        }
-
-        else if (currentPage === "recipes.html") {
-            window.location.href = "special.html";
-        }
-    }
+function toggleDropdown(){
+  const dropdown=document.getElementById("dropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 </script>
 
-
+</body>
+</html>
