@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +39,6 @@ z-index:-1;
 }
 
 /* Header */
-
 header{
 display:flex;
 justify-content:space-between;
@@ -53,7 +53,6 @@ letter-spacing:3px;
 }
 
 /* Dropdown */
-
 nav{
 position:relative;
 }
@@ -99,7 +98,6 @@ background:rgba(50,50,50,0.9);
 }
 
 /* Special Card */
-
 .special{
 max-width:600px;
 margin:90px auto;
@@ -111,7 +109,6 @@ text-align:center;
 }
 
 /* Title */
-
 .special h1{
 font-family:'Cinzel', serif;
 font-size:34px;
@@ -125,7 +122,6 @@ margin-bottom:20px;
 }
 
 /* Image */
-
 .special img{
 width:100%;
 max-height:260px;
@@ -135,7 +131,6 @@ margin-bottom:20px;
 }
 
 /* Recipe Content */
-
 .recipe-box{
 text-align:left;
 }
@@ -154,7 +149,6 @@ color:#ccc;
 }
 
 /* Footer */
-
 footer{
 text-align:center;
 padding:30px;
@@ -164,7 +158,6 @@ margin-top:60px;
 }
 
 /* Responsive */
-
 @media (max-width:768px){
 
 header{
@@ -209,19 +202,47 @@ font-size:28px;
 
 </header>
 
-
 <section class="special">
 
 <h1>Chef's Special</h1>
 
 <p>This week’s featured recipe selected for The Crafted Plate.</p>
 
-<img src="beef-lasagna.png.png" alt="Beef Lasagna">
+<img id="special-img" src="" alt="Chef Special">
 
-<div class="recipe-box">
+<div class="recipe-box" id="special-recipe"></div>
+
+</section>
+
+<footer>
+
+© 2026 The Crafted Plate
+
+</footer>
+
+<script>
+
+/* Dropdown menu */
+
+function toggleDropdown(){
+const dropdown = document.getElementById("dropdown");
+dropdown.style.display =
+dropdown.style.display === "block"
+? "none"
+: "block";
+}
+
+
+/* Weekly Chef Specials */
+
+const specials = [
+
+{
+image:"beef-lasagna.png.png",
+content:`
+<h3>Beef Lasagna</h3>
 
 <h3>Ingredients</h3>
-
 <ul>
 <li>500g ground beef</li>
 <li>1 onion, chopped</li>
@@ -234,7 +255,6 @@ font-size:28px;
 </ul>
 
 <h3>Instructions</h3>
-
 <ol>
 <li>Sauté onion and garlic.</li>
 <li>Add beef and cook until browned.</li>
@@ -244,31 +264,105 @@ font-size:28px;
 <li>Bake at 180°C for 35–40 minutes.</li>
 <li>Let rest before slicing and serving.</li>
 </ol>
+`
+},
 
-</div>
+{
+image:"chocolate-mousse.png.png",
+content:`
+<h3>Chocolate Mousse</h3>
 
-</section>
+<h3>Ingredients</h3>
+<ul>
+<li>200g dark chocolate</li>
+<li>3 eggs</li>
+<li>1 cup heavy cream</li>
+<li>50g sugar</li>
+<li>1 tsp vanilla</li>
+</ul>
 
+<h3>Instructions</h3>
+<ol>
+<li>Melt chocolate gently.</li>
+<li>Separate egg whites and yolks.</li>
+<li>Mix yolks with chocolate.</li>
+<li>Whip cream and egg whites separately.</li>
+<li>Fold everything together gently.</li>
+<li>Chill in the fridge for 2 hours.</li>
+</ol>
+`
+},
 
-<footer>
+{
+image:"seared-salmon.png(1).png",
+content:`
+<h3>Seared Salmon</h3>
 
-© 2026 The Crafted Plate
+<h3>Ingredients</h3>
+<ul>
+<li>2 salmon fillets</li>
+<li>2 tbsp olive oil</li>
+<li>Salt & pepper</li>
+<li>1 lemon</li>
+<li>Fresh parsley</li>
+</ul>
 
-</footer>
+<h3>Instructions</h3>
+<ol>
+<li>Season salmon with salt and pepper.</li>
+<li>Heat oil in a pan.</li>
+<li>Sear salmon skin side down for 4–5 minutes.</li>
+<li>Flip and cook another 3 minutes.</li>
+<li>Finish with lemon juice and parsley.</li>
+</ol>
+`
+},
 
+{
+image:"chicken-biryani.png.png",
+content:`
+<h3>Chicken Biryani</h3>
 
-<script>
+<h3>Ingredients</h3>
+<ul>
+<li>2 cups basmati rice</li>
+<li>500g chicken</li>
+<li>1 cup yogurt</li>
+<li>2 onions</li>
+<li>2 tsp garam masala</li>
+<li>Saffron milk</li>
+</ul>
 
-function toggleDropdown(){
-
-const dropdown = document.getElementById("dropdown");
-
-dropdown.style.display =
-dropdown.style.display === "block"
-? "none"
-: "block";
-
+<h3>Instructions</h3>
+<ol>
+<li>Marinate chicken with yogurt and spices.</li>
+<li>Cook rice until 70% done.</li>
+<li>Layer rice and chicken.</li>
+<li>Add saffron milk.</li>
+<li>Cook on low heat for 25 minutes.</li>
+</ol>
+`
 }
+
+];
+
+
+/* Calculate week of year */
+
+const today = new Date();
+const start = new Date(today.getFullYear(),0,1);
+const week = Math.floor((today - start)/(7*24*60*60*1000));
+
+
+/* Select weekly special */
+
+const special = specials[week % specials.length];
+
+
+/* Update page */
+
+document.getElementById("special-img").src = special.image;
+document.getElementById("special-recipe").innerHTML = special.content;
 
 </script>
 
