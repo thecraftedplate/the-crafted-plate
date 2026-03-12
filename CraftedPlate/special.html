@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crafted Plate | Special</title>
+<link rel="icon" href="favicon.png.png" type="image/png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+/* Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+/* Body */
+body{
+font-family:'Montserrat', sans-serif;
+color:#f0f0f0;
+background:url('background-image-2.png.png') no-repeat center center fixed;
+background-size:cover;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+/* Header */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 60px;
+}
+
+.logo{
+font-family:'Cinzel', serif;
+font-size:32px;
+letter-spacing:3px;
+}
+
+/* Dropdown */
+
+nav{
+position:relative;
+}
+
+nav button{
+background:rgba(30,30,30,0.85);
+color:#f0f0f0;
+font-size:16px;
+padding:10px 20px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-family:'Montserrat', sans-serif;
+}
+
+nav button:hover{
+background:rgba(30,30,30,1);
+}
+
+.dropdown-content{
+display:none;
+position:absolute;
+right:0;
+background:rgba(30,30,30,0.95);
+min-width:160px;
+border-radius:12px;
+overflow:hidden;
+margin-top:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
+}
+
+.dropdown-content a{
+display:block;
+color:#f0f0f0;
+text-decoration:none;
+padding:12px 20px;
+font-size:15px;
+transition:0.3s;
+}
+
+.dropdown-content a:hover{
+background:rgba(50,50,50,0.9);
+}
+
+/* Special Card */
+
+.special{
+max-width:600px;
+margin:90px auto;
+padding:25px;
+background:rgba(30,30,30,0.85);
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.6);
+text-align:center;
+}
+
+/* Title */
+
+.special h1{
+font-family:'Cinzel', serif;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.special p{
+font-size:16px;
+color:#ccc;
+margin-bottom:20px;
+}
+
+/* Image */
+
+.special img{
+width:100%;
+max-height:260px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+/* Recipe Content */
+
+.recipe-box{
+text-align:left;
+}
+
+.recipe-box h3{
+font-family:'Cinzel', serif;
+margin-bottom:8px;
+margin-top:15px;
+}
+
+.recipe-box ul,
+.recipe-box ol{
+margin-left:20px;
+line-height:1.7;
+color:#ccc;
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+padding:30px;
+font-size:14px;
+color:#ccc;
+margin-top:60px;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+header{
+padding:20px;
+}
+
+.special{
+margin:60px 20px;
+}
+
+.special h1{
+font-size:28px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">The Crafted Plate</div>
+
+<nav>
+
+<button onclick="toggleDropdown()">Menu &#9662;</button>
+
+<div class="dropdown-content" id="dropdown">
+
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="recipes.html">Recipes</a>
+<a href="special.html">Special</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy Policy</a>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="special">
+
+<h1>Chef's Special</h1>
+
+<p>This week’s featured recipe selected for The Crafted Plate.</p>
+
+<img src="beef-lasagna.png.png" alt="Beef Lasagna">
+
+<div class="recipe-box">
+
+<h3>Ingredients</h3>
+
+<ul>
+<li>500g ground beef</li>
+<li>1 onion, chopped</li>
+<li>2 cloves garlic</li>
+<li>2 cups tomato sauce</li>
+<li>9 lasagna sheets</li>
+<li>2 cups ricotta cheese</li>
+<li>2 cups mozzarella</li>
+<li>½ cup parmesan</li>
+</ul>
+
+<h3>Instructions</h3>
+
+<ol>
+<li>Sauté onion and garlic.</li>
+<li>Add beef and cook until browned.</li>
+<li>Stir in tomato sauce and simmer 15 minutes.</li>
+<li>Layer pasta, sauce, and cheese in a baking dish.</li>
+<li>Repeat layers and finish with mozzarella.</li>
+<li>Bake at 180°C for 35–40 minutes.</li>
+<li>Let rest before slicing and serving.</li>
+</ol>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 The Crafted Plate
+
+</footer>
+
+
+<script>
+
+function toggleDropdown(){
+
+const dropdown = document.getElementById("dropdown");
+
+dropdown.style.display =
+dropdown.style.display === "block"
+? "none"
+: "block";
+
+}
+
+</script>
+
+</body>
+</html>
+

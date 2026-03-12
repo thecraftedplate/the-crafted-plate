@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crafted Plate | Recipes</title>
+<link rel="icon" href="favicon.png.png" type="image/png">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* Body with background image */
+body {
+  font-family:'Montserrat', sans-serif;
+  color:#f0f0f0;
+  background: url('background-image-2.png.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x:hidden;
+}
+
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.55);
+  z-index:-1;
+}
+
+/* Header */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px 60px;
+  background:transparent;
+}
+
+.logo{
+  font-family:'Cinzel', serif;
+  font-size:32px;
+  letter-spacing:3px;
+  color:#f0f0f0;
+}
+
+/* Dropdown nav */
+nav { position: relative; }
+
+nav button {
+  background: rgba(30,30,30,0.85);
+  color:#f0f0f0;
+  font-size:16px;
+  padding:10px 20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:'Montserrat', sans-serif;
+}
+
+nav button:hover { background: rgba(30,30,30,1); }
+
+nav .dropdown-content {
+  display:none;
+  position:absolute;
+  right:0;
+  background: rgba(30,30,30,0.95);
+  min-width:160px;
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.5);
+}
+/* Search Bar */
+.search-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#recipeSearch {
+  width: 80%;
+  max-width: 500px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  background: rgba(30,30,30,0.85);
+  color: #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+#recipeSearch::placeholder {
+  color: #ccc;
+}
+
+#recipeSearch:focus {
+  background: rgba(50,50,50,0.9);
+  box-shadow: 0 0 10px rgba(240,240,240,0.3);
+}
+
+nav .dropdown-content a {
+  display:block;
+  color:#f0f0f0;
+  text-decoration:none;
+  padding:12px 20px;
+  font-size:15px;
+  transition:0.3s;
+}
+
+nav .dropdown-content a:hover { background: rgba(50,50,50,0.9); }
+
+/* Hero Section for Recipes Page */
+.hero {
+  text-align:center;
+  padding:80px 20px 40px;
+}
+
+.hero h1 {
+  font-family:'Cinzel', serif;
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.hero p {
+  font-size:16px;
+  max-width:700px;
+  margin:auto;
+  margin-bottom:30px;
+  line-height:1.6;
+}
+
+/* Recipes Section */
+.recipes {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  padding:40px 20px 60px;
+}
+
+.recipe-card {
+  flex:0 1 300px;
+  background: rgba(30,30,30,0.85);
+  border-radius:16px;
+  cursor:pointer;
+  overflow:hidden;
+  transition: all 0.3s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,0.5);
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.7);
+}
+
+.recipe-card img {
+   width: 100%;
+  height: 200px; /* you can increase this if needed */
+  object-fit: cover; /* makes the whole image visible */
+  background: rgba(0,0,0,0.1); /* optional: adds a subtle background if image doesn't fill the space */
+  display: block;
+}
+
+.recipe-card h3 {
+  font-family:'Cinzel', serif;
+  font-size:22px;
+  margin:15px 0 10px;
+  padding:0 15px;
+}
+
+/* Modal */
+.modal {
+  display:none;
+  position:fixed;
+  z-index:1000;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow:auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.modal-content {
+  background: rgba(30,30,30,0.95);
+  margin: 8% auto;
+  padding: 0;
+  border-radius: 16px;
+  width: 80%;          /* smaller width */
+  max-width: 500px;    /* limit popup size */
+  color: #f0f0f0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+  animation: fadeIn 0.3s ease;
+  overflow: hidden;
+}
+#modal-body img {
+  width:100%;
+  height:220px;        /* smaller image */
+  object-fit:cover;
+  display:block;
+  border-top-left-radius:16px;
+  border-top-right-radius:16px;
+}
+
+#modal-body h3 {
+  font-family:'Cinzel', serif;
+  font-size:22px;
+  margin:15px;
+}
+
+#modal-body h4 {
+  margin-top:15px;
+  font-size:18px;
+  color:#ccc;
+  padding:0 15px;
+}
+
+#modal-body ul, #modal-body ol {
+  margin:10px 15px 15px 30px;
+  line-height:1.7;
+  color:#ccc;
+}
+
+.close {
+  color:#f0f0f0;
+  float:right;
+  font-size:28px;
+  cursor:pointer;
+  font-weight:bold;
+  margin:10px 20px 0 0;
+}
+
+.close:hover { color:#ccc; }
+
+@keyframes fadeIn{
+  from {opacity:0; transform: scale(0.95);}
+  to {opacity:1; transform: scale(1);}
+}
+
+/* Footer */
+footer {
+  text-align:center;
+  padding:30px;
+  font-size:14px;
+  color:#ccc;
+}
+
+/* Responsive */
+@media (max-width:768px){
+  .recipes{flex-direction:column;align-items:center;}
+  .recipe-card{width:85%;}
+  .hero h1{font-size:32px;}
+  .hero p{font-size:15px;}
+}
+/* Category Buttons Styling */
+.category-buttons button {
+  background: rgba(30,30,30,0.85);
+  color: #f0f0f0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-buttons button:hover {
+  background: rgba(50,50,50,0.9);
+}
+
+.category-buttons button.active {
+  background: #f0f0f0;
+  color: #1e1e1e;
+  font-weight: 600;
+}
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">The Crafted Plate</div>
+  <nav>
+    <button onclick="toggleDropdown()">Menu &#9662;</button>
+    <div class="dropdown-content" id="dropdown">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="special.html">Special</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Explore Our Recipes</h1>
+  <p>Delve into a curated collection of exquisite dishes, from savory mains to decadent desserts, crafted for every culinary enthusiast.</p>
+</section>
+<!-- Search Bar -->
+<div class="search-container">
+  <input type="text" id="recipeSearch" placeholder="Search recipes...">
+</div>
+<!-- Category Buttons -->
+<div class="category-buttons" style="text-align:center; margin:20px 0;">
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('meat')">Meat</button>
+  <button onclick="filterCategory('vegetable')">Vegetable</button>
+  <button onclick="filterCategory('dessert')">Dessert</button>
+  <button onclick="filterCategory('seafood')">Seafood</button>
+  <button onclick="filterCategory('pizza')">Pizza</button>
+  <button onclick="filterCategory('soup')">Soup</button>
+</div>
+
+<section class="recipes">
+  <!-- Recipe Cards (All 27+) -->
+<div class="recipe-card" data-category="meat" onclick="openModal('spaghetti_bolognese')">
+    <img src="spaghetti-bolognese.png.png.png" alt="Spaghetti Bolognese">
+    <h3>Spaghetti Bolognese</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('porkribs')">
+  <img src="pork-ribs.png.png" alt="Pork Ribs">
+  <h3>Pork Ribs</h3>
+</div>
+
+<div class="recipe-card" data-category="dessert" onclick="openModal('classic_cheesecake')">
+    <img src="cheese-cake.png.png" alt="Classic Cheesecake">
+    <h3>Classic Cheesecake</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('grilled_chicken')">
+    <img src="grilled-chicken.png(1).png" alt="Grilled Chicken">
+    <h3>Grilled Chicken</h3>
+</div>
+
+<div class="recipe-card" data-category="pizza" onclick="openModal('hawaiian_pizza')">
+    <img src="hawaiian-pizza.png.png" alt="Hawaiian Pizza">
+    <h3>Hawaiian Pizza</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('steak')">
+    <img src="steak .png.png" alt="Steak">
+    <h3>Steak</h3>
+</div>
+
+<div class="recipe-card" data-category="seafood" onclick="openModal('garlic_butter_shrimp')">
+    <img src="shrimp.png.png" alt="Garlic Butter Shrimp">
+    <h3>Garlic Butter Shrimp</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('chicken_wings')">
+    <img src="chicken-wings.png(1).png" alt="Chicken Wings">
+    <h3>Chicken Wings</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('caesar_salad')">
+    <img src="caesar-salad.png.png" alt="Caesar Salad">
+    <h3>Caesar Salad</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('caprese')">
+  <img src="capresse-salad.png.png" alt="Caprese Salad">
+  <h3>Caprese Salad</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('greek_salad')">
+    <img src="greek-salad.png(1).png" alt="Greek Salad">
+    <h3>Greek Salad</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('mushroom_risotto')">
+    <img src="mushroom-risotto.png(1).png" alt="Mushroom Risotto">
+    <h3>Mushroom Risotto</h3>
+</div>
+
+<div class="recipe-card" data-category="dessert" onclick="openModal('chocolatemousse')">
+  <img src="chocolate-mousse.png.png" alt="Chocolate Mousse">
+  <h3>Chocolate Mousse</h3>
+</div>
+
+<div class="recipe-card" data-category="dessert" onclick="openModal('chocolate_cake')">
+    <img src="chocolate-cake.png(1).png" alt="Chocolate Cake">
+    <h3>Chocolate Cake</h3>
+</div>
+
+<div class="recipe-card" data-category="dessert" onclick="openModal('spongecake')">
+  <img src="spongecake.png.png.png" alt="Sponge Cake">
+  <h3>Sponge Cake</h3>
+</div>
+
+<div class="recipe-card" data-category="dessert" onclick="openModal('tiramisu')">
+    <img src="tiramisu.png.png.png" alt="Tiramisu">
+    <h3>Tiramisu</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('beef_lasagna')">
+    <img src="beef-lasagna.png.png" alt="Beef Lasagna">
+    <h3>Beef Lasagna</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('vegetable_lasagna')">
+    <img src="vegeterian-lasagna.png.png" alt="Vegetable Lasagna">
+    <h3>Vegetable Lasagna</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('beef_bourguignon')">
+    <img src="beef-bourguion.png(1).png" alt="Beef Bourguignon">
+    <h3>Beef Bourguignon</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('chicken_stew')">
+    <img src="chicken-stew.png.png" alt="Chicken Stew">
+    <h3>Chicken Stew</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('chicken_biryani')">
+    <img src="chicken-biryani.png.png" alt="Chicken Biryani">
+    <h3>Chicken Biryani</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('mushroom_pasta')">
+    <img src="mushroom-pasta.png(1).png" alt="Mushroom Pasta">
+    <h3>Mushroom Pasta</h3>
+</div>
+
+<div class="recipe-card" data-category="pizza" onclick="openModal('magharetta_pizza')">
+    <img src="magharetta-pizza.png(1).png.png" alt="Magharetta Pizza">
+    <h3>Magharetta Pizza</h3>
+</div>
+
+<div class="recipe-card" data-category="seafood" onclick="openModal('fish_and_chips')">
+    <img src="fish-and-chips.png(1).png" alt="Fish and Chips">
+    <h3>Fish and Chips</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('chicken_tacos')">
+    <img src="chicken-tacos.png(1).png" alt="Chicken Tacos">
+    <h3>Chicken Tacos</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('beef_tacos')">
+    <img src="beef-tacos.png(1).png" alt="Beef Tacos">
+    <h3>Beef Tacos</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('egg_curry')">
+    <img src="egg-curry.png(1).png" alt="Egg Curry">
+    <h3>Egg Curry</h3>
+</div>
+
+<div class="recipe-card" data-category="seafood" onclick="openModal('seared_salmon')">
+    <img src="seared-salmon.png(1).png" alt="Seared Salmon">
+    <h3>Seared Salmon</h3>
+</div>
+
+<div class="recipe-card" data-category="soup" onclick="openModal('tomatosoup')">
+  <img src="tomato-soup.png.png" alt="Tomato Soup">
+  <h3>Tomato Soup</h3>
+</div>
+
+<div class="recipe-card" data-category="vegetable" onclick="openModal('avocado_toast')">
+    <img src="avocado.png.png.png" alt="Avocado Toast">
+    <h3>Avocado Toast</h3>
+</div>
+
+<div class="recipe-card" data-category="pizza" onclick="openModal('chicken_mushroom_pizza')">
+    <img src="chicken-and-mushroom-pizza.png.png" alt="Chicken & Mushroom Pizza">
+    <h3>Chicken & Mushroom Pizza</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('chicken_quesadillas')">
+    <img src="chicken-quesadillas.png" alt="Chicken Quesadillas">
+    <h3>Chicken Quesadillas</h3>
+</div>
+
+<div class="recipe-card" data-category="meat" onclick="openModal('herb_crusted_lamb_chops')">
+    <img src="herb-crusted lambchops.png(1).png" alt="Herb-Crusted Lamb Chops">
+    <h3>Herb-Crusted Lamb Chops</h3>
+</div>
+</section>
+
+<!-- Recipe Modal -->
+<div id="recipeModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 The Crafted Plate
+</footer>
+
+<script>
+// Dropdown toggle
+function toggleDropdown() {
+  const dropdown = document.getElementById('dropdown');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Recipe data
+const recipes = {
+  chicken_biryani: `
+    <img src="chicken-biryani.png.png" alt="Chicken Biryani">
+    <h3>Chicken Biryani</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>2 cups Basmati rice</li>
+      <li>500g chicken, cut into pieces</li>
+      <li>1 cup yogurt</li>
+      <li>2 onions, sliced</li>
+      <li>2 tsp garam masala</li>
+      <li>1 tsp turmeric</li>
+      <li>Saffron soaked in warm milk</li>
+      <li>4 cups water</li>
+      <li>Salt to taste</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Wash and soak rice for 30 minutes.</li>
+      <li>Marinate chicken with yogurt, turmeric, and garam masala for 1 hour.</li>
+      <li>Fry onions until golden brown; set aside.</li>
+      <li>Boil rice until 70% cooked; drain water.</li>
+      <li>Layer chicken and rice in a pot, sprinkle fried onions and saffron milk.</li>
+      <li>Cover and cook on low heat for 25–30 minutes.</li>
+      <li>Fluff gently and serve hot.</li>
+    </ol>
+  `,
+  spongecake: `
+  <img src="spongecake.png.png.png" alt="Sponge Cake">
+  <h3>Sponge Cake</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>4 eggs</li>
+    <li>120g sugar</li>
+    <li>120g all-purpose flour</li>
+    <li>1 tsp baking powder</li>
+    <li>1 tsp vanilla extract</li>
+    <li>Pinch of salt</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Preheat oven to 180°C (350°F) and grease a baking pan.</li>
+    <li>Beat eggs and sugar until light and fluffy.</li>
+    <li>Sift flour, baking powder, and salt; gently fold into egg mixture.</li>
+    <li>Add vanilla extract and mix carefully.</li>
+    <li>Pour batter into pan and bake for 25–30 minutes or until a toothpick comes out clean.</li>
+    <li>Cool before slicing and serving.</li>
+  </ol>
+`,
+chocolatemousse: `
+  <img src="chocolate-mousse.png.png" alt="Chocolate Mousse">
+  <h3>Chocolate Mousse</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>200g dark chocolate</li>
+    <li>3 eggs, separated</li>
+    <li>50g sugar</li>
+    <li>1 cup heavy cream</li>
+    <li>1 tsp vanilla extract</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Melt chocolate over a double boiler; let cool slightly.</li>
+    <li>Whip egg whites to stiff peaks; set aside.</li>
+    <li>Beat egg yolks with sugar, then fold into melted chocolate.</li>
+    <li>Gently fold in whipped egg whites, then whipped cream and vanilla.</li>
+    <li>Refrigerate for at least 2 hours before serving.</li>
+  </ol>
+`,
+  tiramisu: `
+    <img src="tiramisu.png.png.png" alt="Tiramisu">
+    <h3>Tiramisu</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>200g ladyfingers</li>
+      <li>250g mascarpone cheese</li>
+      <li>3 eggs, separated</li>
+      <li>100g sugar</li>
+      <li>1 cup strong espresso, cooled</li>
+      <li>Cocoa powder for dusting</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Beat egg yolks with sugar until creamy; fold in mascarpone.</li>
+      <li>Whip egg whites to stiff peaks and fold into mascarpone mixture.</li>
+      <li>Dip ladyfingers in espresso briefly; layer in a dish.</li>
+      <li>Spread mascarpone cream over the layer; repeat layers.</li>
+      <li>Refrigerate for at least 4 hours.</li>
+      <li>Dust with cocoa powder before serving.</li>
+    </ol>
+  `,
+  caesar_salad: `
+    <img src="caesar-salad.png.png" alt="Caesar Salad">
+    <h3>Caesar Salad</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>1 romaine lettuce head</li>
+      <li>50g parmesan cheese, grated</li>
+      <li>100g croutons</li>
+      <li>2 cloves garlic</li>
+      <li>2 tbsp olive oil</li>
+      <li>1 egg yolk</li>
+      <li>1 tsp Dijon mustard</li>
+      <li>1 tbsp lemon juice</li>
+      <li>Salt & pepper to taste</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Wash and chop romaine lettuce; set aside in a bowl.</li>
+      <li>In a small bowl, whisk egg yolk, mustard, lemon juice, and olive oil to make dressing.</li>
+      <li>Crush garlic and mix into dressing; season with salt and pepper.</li>
+      <li>Toss lettuce with dressing, croutons, and grated parmesan.</li>
+      <li>Serve immediately for a fresh, crisp salad.</li>
+    </ol>
+     `,
+  spaghetti_bolognese: `
+    <img src="spaghetti-bolognese.png.png.png" alt="Spaghetti Bolognese">
+    <h3>Spaghetti Bolognese</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>400g spaghetti</li>
+      <li>500g ground beef</li>
+      <li>1 onion, chopped</li>
+      <li>2 cloves garlic, minced</li>
+      <li>400g canned tomatoes</li>
+      <li>2 tbsp tomato paste</li>
+      <li>1 tsp dried oregano</li>
+      <li>Salt & pepper to taste</li>
+      <li>Olive oil</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Cook spaghetti according to package instructions; drain and set aside.</li>
+      <li>Heat olive oil in a pan and sauté onions and garlic until soft.</li>
+      <li>Add ground beef and cook until browned.</li>
+      <li>Stir in tomatoes, tomato paste, oregano, salt, and pepper.</li>
+      <li>Simmer for 15–20 minutes.</li>
+      <li>Serve sauce over spaghetti and garnish with parmesan if desired.</li>
+    </ol>
+  `,caprese: `
+  <img src="capresse-salad.png.png" alt="Caprese Salad">
+  <h3>Caprese Salad</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>2 large ripe tomatoes</li>
+    <li>250g fresh mozzarella</li>
+    <li>Fresh basil leaves</li>
+    <li>2 tbsp olive oil</li>
+    <li>1 tbsp balsamic glaze</li>
+    <li>Salt & pepper to taste</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Slice tomatoes and mozzarella into even rounds.</li>
+    <li>Alternate tomato and mozzarella slices on a plate.</li>
+    <li>Tuck basil leaves between the slices.</li>
+    <li>Drizzle with olive oil and balsamic glaze.</li>
+    <li>Season with salt and pepper before serving.</li>
+  </ol>
+`,
+
+  classic_cheesecake: `
+    <img src="cheese-cake.png.png" alt="Classic Cheesecake">
+    <h3>Classic Cheesecake</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>200g digestive biscuits</li>
+      <li>100g melted butter</li>
+      <li>500g cream cheese</li>
+      <li>200g sugar</li>
+      <li>3 eggs</li>
+      <li>1 tsp vanilla extract</li>
+      <li>200ml sour cream</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Preheat oven to 160°C (320°F).</li>
+      <li>Mix crushed biscuits with melted butter and press into a springform pan.</li>
+      <li>Beat cream cheese with sugar until smooth.</li>
+      <li>Add eggs one at a time, then vanilla and sour cream.</li>
+      <li>Pour mixture onto crust and bake for 50–60 minutes.</li>
+      <li>Cool completely and refrigerate before serving.</li>
+    </ol>
+  `,
+  grilled_chicken: `
+    <img src="grilled-chicken.png(1).png" alt="Grilled Chicken">
+    <h3>Grilled Chicken</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>4 chicken breasts</li>
+      <li>2 tbsp olive oil</li>
+      <li>1 tsp paprika</li>
+      <li>1 tsp garlic powder</li>
+      <li>Salt & pepper to taste</li>
+      <li>Fresh herbs for garnish</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Preheat grill to medium-high heat.</li>
+      <li>Brush chicken with olive oil and season with paprika, garlic powder, salt, and pepper.</li>
+      <li>Grill chicken for 6–8 minutes per side until fully cooked.</li>
+      <li>Garnish with fresh herbs and serve.</li>
+    </ol>
+  `,
+  tomatosoup: `
+  <img src="tomato-soup.png.png" alt="Tomato Soup">
+  <h3>Tomato Soup</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>6 ripe tomatoes, chopped</li>
+    <li>1 onion, chopped</li>
+    <li>2 cloves garlic, minced</li>
+    <li>2 cups vegetable broth</li>
+    <li>2 tbsp olive oil</li>
+    <li>Salt and pepper to taste</li>
+    <li>Fresh basil leaves for garnish</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Heat olive oil in a pot; sauté onion and garlic until soft.</li>
+    <li>Add chopped tomatoes and cook for 10 minutes until softened.</li>
+    <li>Pour in vegetable broth, bring to a boil, then simmer for 15 minutes.</li>
+    <li>Blend soup until smooth using a hand blender or regular blender.</li>
+    <li>Season with salt and pepper; serve hot with fresh basil leaves.</li>
+  </ol>
+`,
+  hawaiian_pizza: `
+    <img src="hawaiian-pizza.png.png" alt="Hawaiian Pizza">
+    <h3>Hawaiian Pizza</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>Pizza dough</li>
+      <li>Tomato sauce</li>
+      <li>150g mozzarella cheese</li>
+      <li>100g ham, sliced</li>
+      <li>100g pineapple chunks</li>
+      <li>Olive oil</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Preheat oven to 220°C (430°F).</li>
+      <li>Roll out dough and spread tomato sauce evenly.</li>
+      <li>Top with mozzarella, ham, and pineapple.</li>
+      <li>Bake for 12–15 minutes until crust is golden.</li>
+      <li>Drizzle with olive oil and serve hot.</li>
+    </ol>
+  `,
+  steak: `
+    <img src="steak .png.png" alt="Steak">
+    <h3>Steak</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>2 ribeye steaks</li>
+      <li>Salt & pepper</li>
+      <li>2 tbsp butter</li>
+      <li>2 garlic cloves, crushed</li>
+      <li>Fresh rosemary</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Season steaks with salt and pepper.</li>
+      <li>Heat a skillet over high heat and sear steaks 3–4 minutes per side.</li>
+      <li>Add butter, garlic, and rosemary; spoon over steaks while cooking.</li>
+      <li>Rest for 5 minutes before serving.</li>
+    </ol>
+  `,
+  garlic_butter_shrimp: `
+    <img src="shrimp.png.png" alt="Garlic Butter Shrimp">
+    <h3>Garlic Butter Shrimp</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>500g shrimp, peeled and deveined</li>
+      <li>3 tbsp butter</li>
+      <li>4 cloves garlic, minced</li>
+      <li>1 tbsp lemon juice</li>
+      <li>Chopped parsley</li>
+      <li>Salt & pepper</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Melt butter in a pan and sauté garlic until fragrant.</li>
+      <li>Add shrimp and cook 2–3 minutes per side.</li>
+      <li>Stir in lemon juice, season, and garnish with parsley.</li>
+      <li>Serve immediately.</li>
+    </ol>
+  `,
+  porkribs: `
+  <img src="pork-ribs.png.png" alt="Pork Ribs">
+  <h3>Pork Ribs</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>1 kg pork ribs</li>
+    <li>1/4 cup barbecue sauce</li>
+    <li>2 tbsp olive oil</li>
+    <li>2 cloves garlic, minced</li>
+    <li>1 tsp smoked paprika</li>
+    <li>Salt and pepper to taste</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Preheat oven to 180°C (350°F).</li>
+    <li>Rub ribs with olive oil, garlic, smoked paprika, salt, and pepper.</li>
+    <li>Place ribs in a baking dish, cover with foil, and bake for 1.5 hours.</li>
+    <li>Remove foil, brush with barbecue sauce, and bake for an additional 20 minutes.</li>
+    <li>Serve hot and enjoy tender, flavorful ribs.</li>
+  </ol>
+`,
+  chicken_wings: `
+    <img src="chicken-wings.png(1).png" alt="Chicken Wings">
+    <h3>Chicken Wings</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>1kg chicken wings</li>
+      <li>2 tbsp soy sauce</li>
+      <li>2 tbsp honey</li>
+      <li>1 tsp paprika</li>
+      <li>1 tsp garlic powder</li>
+      <li>Salt & pepper</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Preheat oven to 200°C (390°F).</li>
+      <li>Mix soy sauce, honey, paprika, garlic powder, salt, and pepper.</li>
+      <li>Toss wings in sauce and bake 25–30 minutes, turning halfway.</li>
+      <li>Serve hot with extra sauce if desired.</li>
+    </ol>
+  `,
+  greek_salad: `
+    <img src="greek-salad.png(1).png" alt="Greek Salad">
+    <h3>Greek Salad</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>2 tomatoes, chopped</li>
+      <li>1 cucumber, sliced</li>
+      <li>1 red onion, sliced</li>
+      <li>100g feta cheese, cubed</li>
+      <li>50g black olives</li>
+      <li>Olive oil & lemon juice</li>
+      <li>Oregano, salt, pepper</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Combine all vegetables in a bowl.</li>
+      <li>Add feta and olives.</li>
+      <li>Drizzle with olive oil and lemon juice.</li>
+      <li>Season with oregano, salt, and pepper, then toss gently.</li>
+    </ol>
+  `,
+  mushroom_risotto: `
+    <img src="mushroom-risotto.png(1).png" alt="Mushroom Risotto">
+    <h3>Mushroom Risotto</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>200g Arborio rice</li>
+      <li>1L chicken stock</li>
+      <li>200g mushrooms, sliced</li>
+      <li>1 onion, chopped</li>
+      <li>2 tbsp butter</li>
+      <li>50g parmesan cheese</li>
+      <li>Salt & pepper</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Sauté onions and mushrooms in butter until soft.</li>
+      <li>Add rice and cook 1–2 minutes.</li>
+      <li>Gradually add stock, stirring constantly, until rice is creamy and cooked.</li>
+      <li>Stir in parmesan and season with salt and pepper.</li>
+      <li>Serve hot.</li>
+    </ol>
+  `,
+  chocolate_cake:`
+  <img src="chocolate-cake.png(1).png" alt="Chocolate Cake">
+  <h3>Chocolate Cake</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>200g flour</li>
+    <li>200g sugar</li>
+    <li>200g butter</li>
+    <li>4 eggs</li>
+    <li>50g cocoa powder</li>
+    <li>1 tsp baking powder</li>
+    <li>1 tsp vanilla extract</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Preheat oven to 180°C (350°F).</li>
+    <li>Mix butter and sugar until creamy, then add eggs one by one.</li>
+    <li>Fold in flour, cocoa, baking powder, and vanilla.</li>
+    <li>Pour into greased cake tin and bake 30–35 minutes.</li>
+    <li>Cool before serving; dust with cocoa or frost as desired.</li>
+  </ol>
+`,
+beef_lasagna: `
+  <img src="beef-lasagna.png.png" alt="Beef Lasagna">
+  <h3>Beef Lasagna</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>12 lasagna sheets</li>
+    <li>500g ground beef</li>
+    <li>400g tomato sauce</li>
+    <li>250g ricotta cheese</li>
+    <li>200g mozzarella cheese, shredded</li>
+    <li>1 onion, chopped</li>
+    <li>2 cloves garlic</li>
+    <li>Olive oil, salt, pepper</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Sauté onion and garlic in olive oil, add beef and cook until browned.</li>
+    <li>Add tomato sauce, simmer 10 minutes.</li>
+    <li>Layer sauce, lasagna sheets, and cheeses in a baking dish.</li>
+    <li>Bake at 180°C (350°F) for 35–40 minutes.</li>
+    <li>Let rest 10 minutes, then serve.</li>
+  </ol>
+`,
+
+vegetable_lasagna:`
+  <img src="vegeterian-lasagna.png.png" alt="Vegetable Lasagna">
+  <h3>Vegetable Lasagna</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>12 lasagna sheets</li>
+    <li>1 zucchini, sliced</li>
+    <li>1 bell pepper, chopped</li>
+    <li>200g mushrooms, sliced</li>
+    <li>400g tomato sauce</li>
+    <li>250g ricotta</li>
+    <li>200g mozzarella, shredded</li>
+    <li>Olive oil, salt, pepper</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Sauté vegetables in olive oil until soft.</li>
+    <li>Layer vegetables, tomato sauce, lasagna sheets, and cheeses.</li>
+    <li>Bake at 180°C (350°F) for 35–40 minutes.</li>
+    <li>Cool slightly before slicing and serving.</li>
+  </ol>
+`,
+
+beef_bourguignon :`
+  <img src="beef-bourguion.png(1).png" alt="Beef Bourguignon">
+  <h3>Beef Bourguignon</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>1kg beef, cubed</li>
+    <li>200g bacon, chopped</li>
+    <li>1 onion, sliced</li>
+    <li>2 carrots, sliced</li>
+    <li>2 cups red wine</li>
+    <li>2 cups beef stock</li>
+    <li>2 cloves garlic, minced</li>
+    <li>Thyme, bay leaves, salt, pepper</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Brown beef in batches; set aside.</li>
+    <li>Sauté bacon, onions, carrots, and garlic.</li>
+    <li>Return beef to pot, add wine, stock, thyme, and bay leaves.</li>
+    <li>Simmer on low heat 2–3 hours until tender.</li>
+    <li>Season with salt and pepper and serve.</li>
+  </ol>
+`,
+
+chicken_stew:`
+  <img src="chicken-stew.png.png" alt="Chicken Stew">
+  <h3>Chicken Stew</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>1kg chicken pieces</li>
+    <li>2 onions, chopped</li>
+    <li>3 carrots, chopped</li>
+    <li>2 potatoes, cubed</li>
+    <li>2 cups chicken stock</li>
+    <li>2 tbsp tomato paste</li>
+    <li>Salt, pepper, herbs</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Sauté onions and tomato paste until fragrant.</li>
+    <li>Add chicken and brown slightly.</li>
+    <li>Add vegetables and stock, simmer 45–50 minutes.</li>
+    <li>Season to taste and serve hot.</li>
+  </ol>
+`,
+
+mushroom_pasta: `
+  <img src="mushroom-pasta.png(1).png" alt="Mushroom Pasta">
+  <h3>Mushroom Pasta</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>300g pasta</li>
+    <li>200g mushrooms, sliced</li>
+    <li>2 cloves garlic, minced</li>
+    <li>100ml cream</li>
+    <li>2 tbsp olive oil</li>
+    <li>Parmesan, salt, pepper</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Cook pasta until al dente; drain.</li>
+    <li>Sauté garlic and mushrooms in olive oil.</li>
+    <li>Add cream and simmer 2–3 minutes.</li>
+    <li>Toss pasta with sauce and sprinkle with parmesan.</li>
+  </ol>
+`,
+
+magharetta_pizza:`
+  <img src="magharetta-pizza.png(1).png.png" alt="Margherita Pizza">
+  <h3>Margherita Pizza</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>Pizza dough</li>
+    <li>Tomato sauce</li>
+    <li>150g mozzarella</li>
+    <li>Fresh basil leaves</li>
+    <li>Olive oil</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Preheat oven to 220°C (430°F).</li>
+    <li>Roll dough, spread tomato sauce, top with mozzarella and basil.</li>
+    <li>Bake 10–12 minutes until crust is golden.</li>
+    <li>Drizzle with olive oil and serve.</li>
+  </ol>
+`,
+
+fish_and_chips: `
+  <img src="fish-and-chips.png(1).png" alt="Fish and Chips">
+  <h3>Fish and Chips</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>500g white fish fillets</li>
+    <li>200g flour</li>
+    <li>1 tsp baking powder</li>
+    <li>Cold water</li>
+    <li>Potatoes, sliced</li>
+    <li>Salt & oil for frying</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Mix flour, baking powder, and cold water to make batter.</li>
+    <li>Dip fish in batter and deep-fry until golden.</li>
+    <li>Fry potato slices until crisp.</li>
+    <li>Serve fish with chips and tartar sauce.</li>
+  </ol>
+`,
+
+chicken_tacos: `
+  <img src="chicken-tacos.png(1).png" alt="Chicken Tacos">
+  <h3>Chicken Tacos</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>8 taco shells</li>
+    <li>300g chicken, cooked & shredded</li>
+    <li>Lettuce, tomato, cheese</li>
+    <li>Salsa & sour cream</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Fill taco shells with chicken and toppings.</li>
+    <li>Add salsa and sour cream.</li>
+    <li>Serve immediately.</li>
+  </ol>
+`,
+
+beef_tacos:`
+  <img src="beef-tacos.png(1).png" alt="Beef Tacos">
+  <h3>Beef Tacos</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>8 taco shells</li>
+    <li>300g beef, cooked & seasoned</li>
+    <li>Lettuce, tomato, cheese</li>
+    <li>Salsa & sour cream</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Fill taco shells with beef and toppings.</li>
+    <li>Add salsa and sour cream.</li>
+    <li>Serve immediately.</li>
+  </ol>
+`,
+
+egg_curry: `
+  <img src="egg-curry.png(1).png" alt="Egg Curry">
+  <h3>Egg Curry</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>6 boiled eggs</li>
+    <li>2 onions, chopped</li>
+    <li>2 tomatoes, chopped</li>
+    <li>1 tsp turmeric</li>
+    <li>1 tsp chili powder</li>
+    <li>1 tsp cumin</li>
+    <li>Salt, oil</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Sauté onions and tomatoes with spices.</li>
+    <li>Add boiled eggs and simmer 10 minutes.</li>
+    <li>Serve with rice or bread.</li>
+  </ol>
+`,
+
+seared_salmon: `
+  <img src="seared-salmon.png(1).png" alt="Seared Salmon">
+  <h3>Seared Salmon</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>2 salmon fillets</li>
+    <li>Salt & pepper</li>
+    <li>2 tbsp olive oil</li>
+    <li>1 lemon</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Season salmon with salt and pepper.</li>
+    <li>Heat oil and sear salmon 3–4 minutes each side.</li>
+    <li>Serve with lemon wedges.</li>
+  </ol>
+`,
+
+avocado_toast : `
+  <img src="avocado.png.png.png" alt="Avocado Toast">
+  <h3>Avocado Toast</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>2 slices bread, toasted</li>
+    <li>1 ripe avocado</li>
+    <li>Salt, pepper, chili flakes</li>
+    <li>Lemon juice</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Mash avocado with salt, pepper, and lemon juice.</li>
+    <li>Spread on toast and sprinkle chili flakes.</li>
+    <li>Serve immediately.</li>
+  </ol>
+`,
+
+chicken_mushroom_pizza: `
+  <img src="chicken-and-mushroom-pizza.png.png" alt="Chicken Mushroom Pizza">
+  <h3>Chicken Mushroom Pizza</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>Pizza dough</li>
+    <li>Tomato sauce</li>
+    <li>150g mozzarella</li>
+    <li>100g cooked chicken</li>
+    <li>100g mushrooms, sliced</li>
+    <li>Olive oil</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Preheat oven to 220°C (430°F).</li>
+    <li>Top dough with sauce, cheese, chicken, and mushrooms.</li>
+    <li>Bake 12–15 minutes and serve hot.</li>
+  </ol>
+`,
+
+chicken_quesadillas: `
+  <img src="chicken-quesadillas.png" alt="Chicken Quesadillas">
+  <h3>Chicken Quesadillas</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>4 tortillas</li>
+    <li>200g cooked chicken, shredded</li>
+    <li>100g cheese, shredded</li>
+    <li>1 bell pepper, sliced</li>
+    <li>2 tbsp oil</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Place chicken, cheese, and peppers on tortilla, fold in half.</li>
+    <li>Cook in pan with oil 3–4 minutes per side.</li>
+    <li>Slice and serve with salsa.</li>
+  </ol>
+`,
+
+herb_crusted_lamb_chops: `
+  <img src="herb-crusted lambchops.png(1).png" alt="Herb-Crusted Lamb Chops">
+  <h3>Herb-Crusted Lamb Chops</h3>
+  <h4>Ingredients:</h4>
+  <ul>
+    <li>4 lamb chops</li>
+    <li>2 tbsp olive oil</li>
+    <li>2 cloves garlic, minced</li>
+    <li>1 tbsp fresh rosemary, chopped</li>
+    <li>Salt & pepper</li>
+  </ul>
+  <h4>Instructions:</h4>
+  <ol>
+    <li>Preheat oven to 200°C (390°F).</li>
+    <li>Rub lamb chops with oil, garlic, rosemary, salt, and pepper.</li>
+    <li>Sear chops 2–3 minutes per side, then finish in oven 8–10 minutes.</li>
+    <li>Rest 5 minutes before serving.</li>
+  </ol>
+  `
+};
+// Filter recipes by category & highlight active button
+function filterCategory(category) {
+  const cards = document.querySelectorAll('.recipe-card');
+  const buttons = document.querySelectorAll('.category-buttons button');
+
+  cards.forEach(card => {
+    if(category === 'all' || card.dataset.category === category){
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Highlight active button
+  buttons.forEach(btn => {
+    if(btn.textContent.toLowerCase() === category || (category === 'all' && btn.textContent.toLowerCase() === 'all')){
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+// Real-time search
+const searchInput = document.getElementById('recipeSearch');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  const cards = document.querySelectorAll('.recipe-card');
+
+  cards.forEach(card => {
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    if(title.includes(query)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+
+// Set "All" as default active
+filterCategory('all');
+
+// Open modal
+function openModal(recipeKey){
+  document.getElementById('modal-body').innerHTML = recipes[recipeKey];
+  document.getElementById('recipeModal').style.display = 'block';
+}
+
+// Close modal
+function closeModal(){ document.getElementById('recipeModal').style.display = 'none'; }
+
+// Close modal when clicking outside
+window.onclick = function(event){
+  const modal = document.getElementById('recipeModal');
+  if(event.target == modal){ modal.style.display = 'none'; }
+}
+</script>
+
+</body>
+</html>

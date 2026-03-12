@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About | The Crafted Plate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png.png" type="image/png">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+/* Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+/* Background */
+body{
+font-family:'Montserrat', sans-serif;
+color:#f0f0f0;
+background:url("background-image-2.png.png") no-repeat center center fixed;
+background-size:cover;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+/* Header */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 60px;
+}
+
+.logo{
+font-family:'Cinzel', serif;
+font-size:30px;
+letter-spacing:3px;
+}
+
+/* Dropdown Navigation */
+nav{
+position:relative;
+}
+
+nav button{
+background:rgba(30,30,30,0.85);
+color:#fff;
+border:none;
+padding:10px 18px;
+border-radius:12px;
+cursor:pointer;
+font-family:'Montserrat', sans-serif;
+}
+
+nav button:hover{
+background:#333;
+}
+
+.dropdown-content{
+display:none;
+position:absolute;
+right:0;
+background:rgba(25,25,25,0.95);
+min-width:160px;
+border-radius:12px;
+overflow:hidden;
+margin-top:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+.dropdown-content a{
+display:block;
+padding:12px 18px;
+text-decoration:none;
+color:#eee;
+font-size:14px;
+}
+
+.dropdown-content a:hover{
+background:#333;
+}
+
+/* About Container */
+.container{
+max-width:900px;
+margin:80px auto;
+padding:50px;
+background:rgba(30,30,30,0.85);
+border-radius:16px;
+box-shadow:0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* Typography */
+h1{
+font-family:'Cinzel', serif;
+font-size:38px;
+text-align:center;
+margin-bottom:35px;
+}
+
+h2{
+font-family:'Cinzel', serif;
+font-size:24px;
+margin-top:40px;
+margin-bottom:15px;
+color: rgb(255, 255, 255);
+}
+
+p{
+line-height:1.7;
+margin-bottom:20px;
+color:#ddd;
+}
+
+ul{
+margin-left:20px;
+margin-bottom:20px;
+}
+
+li{
+margin-bottom:8px;
+}
+
+/* Footer */
+footer{
+text-align:center;
+padding:30px;
+font-size:14px;
+color:#ccc;
+margin-top:60px;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+header{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.container{
+margin:40px 20px;
+padding:35px;
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">The Crafted Plate</div>
+
+<nav>
+<button onclick="toggleMenu()">Menu ▾</button>
+
+<div class="dropdown-content" id="menu">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="recipes.html">Recipes</a>
+<a href="special.html">Special</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy Policy</a>
+</div>
+
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<h1>About The Crafted Plate</h1>
+
+<p>
+Welcome to <strong>The Crafted Plate</strong> — a destination where passion for cooking meets elegance, creativity, and everyday practicality.
+</p>
+
+<p>
+The Crafted Plate was created with one simple vision: to inspire home cooks around the world to create beautiful, flavorful meals with confidence.
+</p>
+
+<h2>Our Mission</h2>
+
+<p>
+Our mission is to provide high-quality, easy-to-follow recipes that elevate everyday cooking into something truly special.
+</p>
+
+<ul>
+<li>Clear step-by-step instructions</li>
+<li>Accessible ingredients</li>
+<li>Practical cooking techniques</li>
+<li>Professional presentation tips</li>
+</ul>
+
+<h2>What You’ll Find Here</h2>
+
+<p>
+At The Crafted Plate, you'll discover recipes including:
+</p>
+
+<ul>
+<li>Classic comfort dishes</li>
+<li>Premium steak and grill recipes</li>
+<li>Authentic international flavors</li>
+<li>Quick family meals</li>
+<li>Elegant desserts and baked goods</li>
+</ul>
+
+<h2>Why We Created This Platform</h2>
+
+<p>
+Cooking is more than preparing food — it's an art form, a creative outlet, and a way to connect with people. The Crafted Plate celebrates that experience.
+</p>
+
+<h2>Our Commitment</h2>
+
+<p>
+We believe in transparency and quality. Some pages may contain advertisements or affiliate links that help support the site, but every recommendation is made thoughtfully.
+</p>
+
+<h2>Join Our Culinary Journey</h2>
+
+<p>
+Whether you're here to master a steak, perfect a pizza, or discover your next favorite dessert, we're glad you're here.
+</p>
+
+</div>
+
+<footer>
+© 2026 The Crafted Plate
+</footer>
+
+<script>
+
+/* Dropdown Menu */
+function toggleMenu(){
+const menu = document.getElementById("menu");
+menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+/* Swipe Navigation */
+let startX = 0;
+let endX = 0;
+
+document.addEventListener("touchstart", e=>{
+startX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", e=>{
+endX = e.changedTouches[0].screenX;
+handleSwipe();
+});
+
+function handleSwipe(){
+
+const page = window.location.pathname.split("/").pop();
+
+if(endX < startX - 50){
+if(page === "index.html"){ window.location.href="special.html"; }
+else if(page === "special.html"){ window.location.href="recipes.html"; }
+}
+
+if(endX > startX + 50){
+if(page === "special.html"){ window.location.href="index.html"; }
+else if(page === "recipes.html"){ window.location.href="special.html"; }
+}
+
+}
+
+</script>
+
+</body>
+</html>
+
