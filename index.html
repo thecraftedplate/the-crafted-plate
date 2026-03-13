@@ -6,19 +6,41 @@
 <title>The Crafted Plate</title>
 <link rel="icon" href="favicon.png.png" type="image/png">
 
-
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
+<!-- SEO Meta -->
+<meta name="description" content="Discover refined recipes and beautifully crafted dishes.">
+<meta name="keywords" content="Recipes, Cooking, Chicken Biryani, Tiramisu, Caesar Salad, The Crafted Plate">
+<meta name="author" content="The Crafted Plate">
+
+<!-- Open Graph -->
+<meta property="og:title" content="The Crafted Plate">
+<meta property="og:description" content="Discover refined recipes and beautifully crafted dishes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yourusername.github.io/">
+<meta property="og:image" content="preview-image.png">
+
+<!-- Structured Data for Recipes -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Crafted Plate",
+  "url": "https://yourusername.github.io/",
+  "description": "Discover refined recipes and beautifully crafted dishes.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Crafted Plate"
+  }
+}
+</script>
+
 <style>
 /* Reset */
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
-/* Body with background image */
+/* Body */
 body {
   font-family:'Montserrat', sans-serif;
   color:#f0f0f0;
@@ -26,7 +48,6 @@ body {
   background-size: cover;
   overflow-x:hidden;
 }
-
 body::before {
   content:"";
   position:fixed;
@@ -39,223 +60,45 @@ body::before {
 }
 
 /* Header */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:25px 60px;
-  background:transparent;
-}
-
-.logo{
-  font-family:'Cinzel', serif;
-  font-size:32px;
-  letter-spacing:3px;
-  color:#f0f0f0;
-}
-
-/* Dropdown nav */
-nav {
-  position: relative;
-}
-
-nav button {
-  background: rgba(30,30,30,0.85);
-  color:#f0f0f0;
-  font-size:16px;
-  padding:10px 20px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  font-family:'Montserrat', sans-serif;
-}
-
-nav button:hover {
-  background: rgba(30,30,30,1);
-}
-
-nav .dropdown-content {
-  display:none;
-  position:absolute;
-  right:0;
-  background: rgba(30,30,30,0.95);
-  min-width:160px;
-  border-radius:12px;
-  overflow:hidden;
-  margin-top:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.5);
-}
-
-nav .dropdown-content a {
-  display:block;
-  color:#f0f0f0;
-  text-decoration:none;
-  padding:12px 20px;
-  font-size:15px;
-  transition:0.3s;
-}
-
-nav .dropdown-content a:hover {
-  background: rgba(50,50,50,0.9);
-}
+header{ display:flex; justify-content:space-between; align-items:center; padding:25px 60px; background:transparent; }
+.logo{ font-family:'Cinzel', serif; font-size:32px; letter-spacing:3px; color:#f0f0f0; }
+nav{ position: relative; }
+nav button{ background: rgba(30,30,30,0.85); color:#f0f0f0; font-size:16px; padding:10px 20px; border:none; border-radius:12px; cursor:pointer; font-family:'Montserrat', sans-serif; }
+nav button:hover{ background: rgba(30,30,30,1); }
+nav .dropdown-content{ display:none; position:absolute; right:0; background: rgba(30,30,30,0.95); min-width:160px; border-radius:12px; overflow:hidden; margin-top:10px; box-shadow:0 5px 15px rgba(0,0,0,0.5); }
+nav .dropdown-content a{ display:block; color:#f0f0f0; text-decoration:none; padding:12px 20px; font-size:15px; transition:0.3s; }
+nav .dropdown-content a:hover{ background: rgba(50,50,50,0.9); }
 
 /* Hero Section */
-.hero {
-  text-align:center;
-  padding:100px 20px 60px;
-}
-
-.hero h1 {
-  font-family:'Cinzel', serif;
-  font-size:48px;
-  margin-bottom:20px;
-}
-
-.hero p {
-  font-size:18px;
-  max-width:700px;
-  margin:auto;
-  margin-bottom:30px;
-  line-height:1.6;
-}
-
-.hero a button {
-  padding:14px 32px;
-  border:none;
-  background:#1e1e1e;
-  color:#f0f0f0;
-  font-size:14px;
-  letter-spacing:1px;
-  cursor:pointer;
-  transition: all 0.3s ease;
-  border-radius:20px;
-}
-
-.hero a button:hover {
-  background:#333;
-  transform: scale(1.05);
-}
+.hero{ text-align:center; padding:100px 20px 60px; }
+.hero h1{ font-family:'Cinzel', serif; font-size:48px; margin-bottom:20px; }
+.hero p{ font-size:18px; max-width:700px; margin:auto; margin-bottom:30px; line-height:1.6; }
+.hero a button{ padding:14px 32px; border:none; background:#1e1e1e; color:#f0f0f0; font-size:14px; letter-spacing:1px; cursor:pointer; transition: all 0.3s ease; border-radius:20px; }
+.hero a button:hover{ background:#333; transform: scale(1.05); }
 
 /* Recipes Section */
-.recipes {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:30px;
-  padding:40px 20px 60px;
-}
-
-.recipe-card {
-  flex:0 1 300px;
-  background: rgba(30,30,30,0.85);
-  border-radius:16px;
-  cursor:pointer;
-  overflow:hidden;
-  transition: all 0.3s ease;
-  box-shadow:0 4px 10px rgba(0,0,0,0.5);
-}
-
-.recipe-card:hover {
-  transform: translateY(-5px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.7);
-}
-.recipe-card img {
-   width: 100%;
-  height: 200px; /* you can increase this if needed */
-  object-fit: cover; /* makes the whole image visible */
-  background: rgba(0,0,0,0.1); /* optional: adds a subtle background if image doesn't fill the space */
-  display: block;
-}
-.recipe-card h3 {
-  font-family:'Cinzel', serif;
-  font-size:22px;
-  margin:15px 0 10px;
-  padding:0 15px;
-}
-
+.recipes{ display:flex; justify-content:center; flex-wrap:wrap; gap:30px; padding:40px 20px 60px; }
+.recipe-card{ flex:0 1 300px; background: rgba(30,30,30,0.85); border-radius:16px; cursor:pointer; overflow:hidden; transition: all 0.3s ease; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
+.recipe-card:hover{ transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.7); }
+.recipe-card img{ width:100%; height:200px; object-fit:cover; display:block; background: rgba(0,0,0,0.1); }
+.recipe-card h3{ font-family:'Cinzel', serif; font-size:22px; margin:15px 0 10px; padding:0 15px; }
 
 /* Modal */
-.modal {
-  display:none;
-  position:fixed;
-  z-index:1000;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
-  overflow:auto;
-  background: rgba(0,0,0,0.85);
-}
-
-.modal-content {
-  background: rgba(30,30,30,0.95);
-  margin: 8% auto;
-  padding: 0;
-  border-radius: 16px;
-  width: 80%;          /* smaller width */
-  max-width: 500px;    /* limit popup size */
-  color: #f0f0f0;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-  animation: fadeIn 0.3s ease;
-  overflow: hidden;
-}
-#modal-body img {
-  width:100%;
-  height:220px;        /* smaller image */
-  object-fit:cover;
-  display:block;
-  border-top-left-radius:16px;
-  border-top-right-radius:16px;
-}
-
-#modal-body h3 {
-  font-family:'Cinzel', serif;
-  font-size:22px;
-  margin:15px;
-}
-
-#modal-body h4 {
-  margin-top:15px;
-  font-size:18px;
-  color:#ccc;
-  padding:0 15px;
-}
-
-#modal-body ul, #modal-body ol {
-  margin:10px 15px 15px 30px;
-  line-height:1.7;
-  color:#ccc;
-}
-
-.close {
-  color:#f0f0f0;
-  float:right;
-  font-size:28px;
-  cursor:pointer;
-  font-weight:bold;
-  margin:10px 20px 0 0;
-}
-.close:hover { color:#ccc; }
-@keyframes fadeIn{
-  from {opacity:0; transform: scale(0.95);}
-  to {opacity:1; transform: scale(1);}
-}
+.modal{ display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background: rgba(0,0,0,0.85); }
+.modal-content{ background: rgba(30,30,30,0.95); margin: 8% auto; padding:0; border-radius:16px; width:80%; max-width:500px; color:#f0f0f0; box-shadow:0 8px 25px rgba(0,0,0,0.7); animation: fadeIn 0.3s ease; overflow:hidden; }
+#modal-body img{ width:100%; height:220px; object-fit:cover; display:block; border-top-left-radius:16px; border-top-right-radius:16px; }
+#modal-body h3{ font-family:'Cinzel', serif; font-size:22px; margin:15px; }
+#modal-body h4{ margin-top:15px; font-size:18px; color:#ccc; padding:0 15px; }
+#modal-body ul, #modal-body ol{ margin:10px 15px 15px 30px; line-height:1.7; color:#ccc; }
+.close{ color:#f0f0f0; float:right; font-size:28px; cursor:pointer; font-weight:bold; margin:10px 20px 0 0; }
+.close:hover{ color:#ccc; }
+@keyframes fadeIn{ from{opacity:0; transform: scale(0.95);} to{opacity:1; transform: scale(1);} }
 
 /* Footer */
-footer {
-  text-align:center;
-  padding:30px;
-  font-size:14px;
-  color:#ccc;
-}
+footer{ text-align:center; padding:30px; font-size:14px; color:#ccc; }
 
 /* Responsive */
-@media (max-width:768px){
-  .recipes{flex-direction:column;align-items:center;}
-  .recipe-card{width:85%;}
-  .hero h1{font-size:36px;}
-  .hero p{font-size:16px;}
-}
+@media (max-width:768px){ .recipes{flex-direction:column;align-items:center;} .recipe-card{width:85%;} .hero h1{font-size:36px;} .hero p{font-size:16px;} }
 </style>
 </head>
 
@@ -287,12 +130,10 @@ footer {
     <img src="chicken-biryani.png.png" alt="Chicken Biryani">
     <h3>Chicken Biryani</h3>
   </div>
-
   <div class="recipe-card" onclick="openModal('tiramisu')">
     <img src="tiramisu.png.png.png" alt="Tiramisu">
     <h3>Tiramisu</h3>
   </div>
-
   <div class="recipe-card" onclick="openModal('caesar')">
     <img src="caesar-salad.png.png" alt="Caesar Salad">
     <h3>Caesar Salad</h3>
@@ -318,7 +159,7 @@ function toggleDropdown() {
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 
-// Recipe data
+// Recipes with full step-by-step details
 const recipes = {
   biryani: `
     <img src="chicken-biryani.png.png" alt="Chicken Biryani">
@@ -394,24 +235,13 @@ const recipes = {
   `
 };
 
-// Open modal
+// Modal functions
 function openModal(recipeKey){
   document.getElementById('modal-body').innerHTML = recipes[recipeKey];
   document.getElementById('recipeModal').style.display = 'block';
 }
-
-// Close modal
-function closeModal(){
-  document.getElementById('recipeModal').style.display = 'none';
-}
-
-// Close modal when clicking outside
-window.onclick = function(event){
-  const modal = document.getElementById('recipeModal');
-  if(event.target == modal){
-    modal.style.display = 'none';
-  }
-}
+function closeModal(){ document.getElementById('recipeModal').style.display = 'none'; }
+window.onclick = function(event){ if(event.target == document.getElementById('recipeModal')) closeModal(); }
 </script>
 
 </body>
