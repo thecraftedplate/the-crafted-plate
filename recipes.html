@@ -1040,15 +1040,8 @@ html {
 </footer>
 
 <script>
-// Dropdown toggle
-function toggleDropdown() {
-  const dropdown = document.getElementById('dropdown');
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-}
-
-// Recipe data
-const recipes = {
- spaghetti_bolognese: `
+  const recipes = {
+  spaghetti_bolognese: `
 <img src="spaghetti-bolognese.png.png.png">
 <h3>Spaghetti Bolognese (Authentic Slow-Rich Ragu)</h3>
 
@@ -1092,7 +1085,7 @@ const recipes = {
 </ul>
 `,
 
-steak: `
+steak :`
 <img src="steak .png.png">
 <h3>Perfect Pan-Seared Steak (Restaurant Style)</h3>
 
@@ -2513,134 +2506,109 @@ pancakes: `
   <li>Do not press pancakes — keeps them fluffy.</li>
 </ul>
 `,
-}
-</script>
-<script>
 
-// ===== GLOBAL VARIABLES =====
-const searchInput = document.getElementById('recipeSearch');
-const categoryButtons = document.querySelectorAll('.category-buttons button');
-const cards = document.querySelectorAll('.recipe-card');
-const modal = document.getElementById('recipeModal');
-const modalBody = document.getElementById('modal-body');
-const menuBtn = document.getElementById('menuBtn');
-const menu = document.getElementById('menu');
+  // example:
+  // spaghetti_bolognese: `...`,
+};
 
-// ===== FAVORITES =====
-function toggleFavorite(e) {
-  e.stopPropagation();
-  const card = e.target.closest('.recipe-card');
-  if (!card) return;
-  const recipeId = card.dataset.id;
-  if (!recipeId) return;
 
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+// =========================
+// ELEMENTS
+// =========================
+const modal = document.getElementById("recipeModal");
+const modalBody = document.getElementById("modal-body");
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
 
-  if (favorites.includes(recipeId)) {
-    favorites = favorites.filter(id => id !== recipeId);
-    e.target.classList.remove("active");
-  } else {
-    favorites.push(recipeId);
-    e.target.classList.add("active");
-  }
 
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-}
+// =========================
+// OPEN MODAL
+// =========================
+window.openModal = function(recipeKey) {
 
-// Restore favorites on page load
-window.addEventListener("DOMContentLoaded", () => {
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  cards.forEach(card => {
-    const heart = card.querySelector('.favorite');
-    const recipeId = card.dataset.id;
-    if (!heart || !recipeId) return;
-    if (favorites.includes(recipeId)) heart.classList.add("active");
-  });
-});
+  const raw = recipes[recipeKey];
 
-// ===== CATEGORY FILTER + SEARCH =====
-function updateDisplay() {
-  const query = searchInput ? searchInput.value.toLowerCase() : '';
-  const activeCategoryBtn = document.querySelector('.category-buttons button.active');
-  const activeCategory = activeCategoryBtn ? activeCategoryBtn.dataset.category : 'all';
-
-  cards.forEach(card => {
-    const titleEl = card.querySelector('h3');
-    if (!titleEl) return;
-    const title = titleEl.textContent.toLowerCase();
-    const matchesSearch = title.includes(query);
-    const matchesCategory = activeCategory === 'all' || card.dataset.category.includes(activeCategory);
-    card.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
-  });
-}
-
-function filterCategory(category) {
-  categoryButtons.forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.category === category || (category === 'all' && btn.dataset.category === 'all'));
-  });
-  updateDisplay();
-}
-
-// Event listeners
-categoryButtons.forEach(btn => btn.addEventListener('click', () => filterCategory(btn.dataset.category)));
-if (searchInput) searchInput.addEventListener('input', updateDisplay);
-filterCategory('all');
-
-// ===== MODAL =====
-function openModal(recipeKey) {
-  if (!window.recipes || !recipes[recipeKey]) {
-    console.error("Recipe not found:", recipeKey);
+  if (!raw) {
+    modalBody.innerHTML = "<p style='padding:20px;'>Recipe not found.</p>";
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
     return;
   }
 
   const temp = document.createElement("div");
-  temp.innerHTML = recipes[recipeKey];
+  temp.innerHTML = raw;
 
+  // Extract image
   const imgEl = temp.querySelector("img");
-  const imgHTML = imgEl ? imgEl.outerHTML : '';
-  if (imgEl) imgEl.remove();
+  const imgHTML = imgEl ? imgEl.outerHTML : "";
 
-  const content = temp.innerHTML;
-  if (!modalBody) return;
+  if (imgEl) imgEl.remove();
 
   modalBody.innerHTML = `
     <div class="modal-content">
-      <div class="modal-left">${imgHTML}</div>
+      
+      <div class="modal-left">
+        ${imgHTML}
+      </div>
+
       <div class="modal-right">
         <div class="back-btn" onclick="closeModal()">← Back</div>
-        ${content}
+        ${temp.innerHTML}
       </div>
+
     </div>
   `;
 
-  modal.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+};
 
-function closeModal() {
-  modal.classList.remove('show');
-  document.body.style.overflow = 'auto';
-}
 
-window.addEventListener('click', e => {
-  if (modal && e.target === modal) closeModal();
+// =========================
+// CLOSE MODAL
+// =========================
+window.closeModal = function() {
+  modal.classList.remove("show");
+  document.body.style.overflow = "auto";
+};
+
+
+// =========================
+// CLICK OUTSIDE TO CLOSE
+// =========================
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
 });
 
-// ===== MENU DROPDOWN =====
+
+// =========================
+// DROPDOWN MENU TOGGLE
+// =========================
 function toggleDropdown() {
-  menu.classList.toggle('show');
+  if (menu) menu.classList.toggle("show");
 }
 
-if (menuBtn && menu) {
-  menuBtn.addEventListener('click', e => {
+
+// =========================
+// MENU BUTTON CLICK
+// =========================
+if (menuBtn) {
+  menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     toggleDropdown();
   });
-
-  window.addEventListener('click', e => {
-    if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
-      menu.classList.remove('show');
-    }
-  });
 }
+
+
+// =========================
+// CLOSE DROPDOWN ON OUTSIDE CLICK
+// =========================
+window.addEventListener("click", (e) => {
+  if (menu && menuBtn && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+    menu.classList.remove("show");
+  }
+});
+
 </script>
