@@ -390,6 +390,15 @@ html {
    MOBILE FIX (IMPORTANT)
 ========================= */
 @media (max-width: 768px){
+  @media (max-width: 768px) {
+  .modal {
+    flex-direction: column;
+  }
+
+  .modal-right {
+    justify-content: flex-start;  /* keep text at top */
+  }
+}
 
   .modal-content {
     flex-direction: column;
