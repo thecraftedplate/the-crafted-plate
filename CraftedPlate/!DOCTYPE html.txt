@@ -1,223 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>The Crafted Plate</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta property="og:title" content="The Crafted Plate">
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WJPB16S0XM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crafted Plate</title>
+<link rel="icon" href="favicon.png.png" type="image/png">
 
-  gtag('config', 'G-WJPB16S0XM');
-</script>
-<meta property="og:description" content="Luxury home recipes crafted with passion, precision, and elegance.">
-<meta property="og:image" content="https://thecraftedplate.netlify.app/the-crafted-plate-2.png.png">
-<meta property="og:url" content="https://thecraftedplate.netlify.app">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- SEO Meta -->
+<meta name="description" content="Discover refined recipes and beautifully crafted dishes.">
+<meta name="keywords" content="Recipes, Cooking, Chicken Biryani, Tiramisu, Caesar Salad, The Crafted Plate">
+<meta name="author" content="The Crafted Plate">
+
+<!-- Open Graph -->
+<meta property="og:title" content="The Crafted Plate">
+<meta property="og:description" content="Discover refined recipes and beautifully crafted dishes.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://yourusername.github.io/">
+<meta property="og:image" content="preview-image.png">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Crafted Plate">
-<meta name="twitter:description" content="Luxury home recipes crafted with passion and bold flavor.">
-<meta name="twitter:image" content="https://thecraftedplate.netlify.app/the-crafted-plate-2.png.png">
+<!-- Structured Data for Recipes -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Crafted Plate",
+  "url": "https://yourusername.github.io/",
+  "description": "Discover refined recipes and beautifully crafted dishes.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Crafted Plate"
+  }
+}
+</script>
 
-    <link rel="icon" href="favicon.png.png" type="image/png">
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
 
+/* Body */
+body {
+  font-family:'Montserrat', sans-serif;
+  color:#f0f0f0;
+  background: url('background-image-2.png.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x:hidden;
+}
+body::before {
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.55);
+  z-index:-1;
+}
 
-    <!-- Elegant Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+/* Header */
+header{ display:flex; justify-content:space-between; align-items:center; padding:25px 60px; background:transparent; }
+.logo{ font-family:'Cinzel', serif; font-size:32px; letter-spacing:3px; color:#f0f0f0; }
+nav{ position: relative; }
+nav button{ background: rgba(30,30,30,0.85); color:#f0f0f0; font-size:16px; padding:10px 20px; border:none; border-radius:12px; cursor:pointer; font-family:'Montserrat', sans-serif; }
+nav button:hover{ background: rgba(30,30,30,1); }
+nav .dropdown-content{ display:none; position:absolute; right:0; background: rgba(30,30,30,0.95); min-width:160px; border-radius:12px; overflow:hidden; margin-top:10px; box-shadow:0 5px 15px rgba(0,0,0,0.5); }
+nav .dropdown-content a{ display:block; color:#f0f0f0; text-decoration:none; padding:12px 20px; font-size:15px; transition:0.3s; }
+nav .dropdown-content a:hover{ background: rgba(50,50,50,0.9); }
 
-    <style>
-      body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-image: url("background-image-2.png.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #fff;
-        }
+/* Hero Section */
+.hero{ text-align:center; padding:100px 20px 60px; }
+.hero h1{ font-family:'Cinzel', serif; font-size:48px; margin-bottom:20px; }
+.hero p{ font-size:18px; max-width:700px; margin:auto; margin-bottom:30px; line-height:1.6; }
+.hero a button{ padding:14px 32px; border:none; background:#1e1e1e; color:#f0f0f0; font-size:14px; letter-spacing:1px; cursor:pointer; transition: all 0.3s ease; border-radius:20px; }
+.hero a button:hover{ background:#333; transform: scale(1.05); }
 
+/* Recipes Section */
+.recipes{ display:flex; justify-content:center; flex-wrap:wrap; gap:30px; padding:40px 20px 60px; }
+.recipe-card{ flex:0 1 300px; background: rgba(30,30,30,0.85); border-radius:16px; cursor:pointer; overflow:hidden; transition: all 0.3s ease; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
+.recipe-card:hover{ transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.7); }
+.recipe-card img{ width:100%; height:200px; object-fit:cover; display:block; background: rgba(0,0,0,0.1); }
+.recipe-card h3{ font-family:'Cinzel', serif; font-size:22px; margin:15px 0 10px; padding:0 15px; }
 
-        header {
-            background: #000;
-            padding: 20px 20px;
-            text-align: center;
-            border-bottom: 1px solid #d4af37;
-             border-radius: 20px;
-        }
+/* Modal */
+.modal{ display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background: rgba(0,0,0,0.85);transition-duration:4s; }
+.modal-content{ background: rgba(30,30,30,0.95); margin: 8% auto; padding:0; border-radius:16px; width:80%; max-width:500px; color:#f0f0f0; box-shadow:0 8px 25px rgba(0,0,0,0.7); animation: fadeIn 0.3s ease; overflow:hidden; }
+#modal-body img{ width:100%; height:220px; object-fit:cover; display:block; border-top-left-radius:16px; border-top-right-radius:16px; }
+#modal-body h3{ font-family:'Cinzel', serif; font-size:22px; margin:15px; }
+#modal-body h4{ margin-top:15px; font-size:18px; color:#ccc; padding:0 15px; }
+#modal-body ul, #modal-body ol{ margin:10px 15px 15px 30px; line-height:1.7; color:#ccc; }
+.close{ color:#f0f0f0; float:right; font-size:28px; cursor:pointer; font-weight:bold; margin:10px 20px 0 0; }
+.close:hover{ color:#ccc; }
+@keyframes fadeIn{ from{opacity:0; transform: scale(0.95);} to{opacity:1; transform: scale(1);} }
 
-        /* Logo Styling */
-        .logo {
-            width: 240px;
-            height: 100px;
-            object-fit: contain;
-            transition: 0.3s ease;
-        }
+/* Footer */
+footer{ text-align:center; padding:30px; font-size:14px; color:#ccc; }
 
-        .logo:hover {
-            box-shadow: 0 0 35px rgba(212, 175, 55, 0.4);
-            transform: scale(1.05);
-        }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            letter-spacing: 2px;
-            color: #d4af37;
-            margin: 0;
-        }
-
-        nav {
-            background: #111;
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #d4af37;
-        }
-
-        nav a {
-            color: #f5f5f5;
-            text-decoration: none;
-            margin: 0 20px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #d4af37;
-        }
-
-        .hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 75vh;
-        }
-
-        .welcome-card {
-            width: 580px;
-            height: 320px;
-            background: #141414;
-            border: 1px solid #d4af37;
-            border-radius: 25px;
-            padding: 40px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-
-        .welcome-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 0 45px rgba(212, 175, 55, 0.35);
-            border-color: #f0c75e;
-        }
-
-        .welcome-card h2 {
-            font-family: 'Playfair Display', serif;
-            color: #d4af37;
-            margin-bottom: 20px;
-            font-size: 26px;
-        }
-
-        .welcome-card p {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #ddd;
-        }
-
-        .welcome-card a {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 10px 25px;
-            border: 1px solid #d4af37;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #d4af37;
-            transition: 0.3s;
-        }
-
-        .welcome-card a:hover {
-            background: #d4af37;
-            color: #000;
-        }
-
-        footer {
-            background: #000;
-            text-align: center;
-            padding: 25px;
-            border-top: 1px solid #d4af37;
-        }
-
-        footer a {
-            color: #d4af37;
-            text-decoration: none;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 14px;
-            color: #aaa;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                height: auto;
-                padding: 40px 0;
-            }
-
-            .welcome-card {
-                width: 85%;
-                height: auto;
-            }
-
-            nav a {
-                display: block;
-                margin: 10px 0;
-            }
-        }
-
-    </style>
+/* Responsive */
+@media (max-width:768px){ .recipes{flex-direction:column;align-items:center;} .recipe-card{width:85%;} .hero h1{font-size:36px;} .hero p{font-size:16px;} }
+</style>
 </head>
+
 <body>
 
 <header>
-    <!-- LOGO IMAGE -->
-    <img src="The-crafted-plate.png.png" alt="The Crafted Plate Logo" class="logo">
+  <div class="logo">The Crafted Plate</div>
+  <nav>
+  <button id="menuBtn">Menu &#9776;</button>
 
-    <h1>The Crafted Plate</h1>
-</header>
+  <!-- Overlay -->
+  <div id="overlay"></div>
 
-
-<nav>
-
+  <!-- Sliding Menu -->
+  <div class="dropdown-content" id="dropdown">
     <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
+    <a href="about.html">About</a>
     <a href="recipes.html">Recipes</a>
     <a href="special.html">Special</a>
     <a href="contact.html">Contact</a>
     <a href="privacy.html">Privacy Policy</a>
+  </div>
 </nav>
+</header>
 
 <section class="hero">
-    <div class="welcome-card">
-        <h2>Welcome to The Crafted Plate</h2>
-        <p>
-            Where everyday cooking becomes an art. Discover refined recipes,
-            premium flavors, and beautifully crafted dishes designed
-            to elevate your culinary experience.
-        </p>
-        <a href="recipes.html">Explore Recipes</a>
-    </div>
+  <h1>Welcome to The Crafted Plate</h1>
+  <p>Where everyday cooking becomes an art. Discover refined recipes, premium flavors, and beautifully crafted dishes designed to elevate your culinary experience.</p>
+  <a href="recipes.html"><button>Explore More</button></a>
 </section>
 
+<section class="recipes">
+  <div class="recipe-card" onclick="openModal('biryani')">
+    <img src="chicken-biryani.png.png" alt="Chicken Biryani">
+    <h3>Chicken Biryani</h3>
+  </div>
+  <div class="recipe-card" onclick="openModal('tiramisu')">
+    <img src="tiramisu.png.png.png" alt="Tiramisu">
+    <h3>Tiramisu</h3>
+  </div>
+  <div class="recipe-card" onclick="openModal('caesar')">
+    <img src="caesar-salad.png.png" alt="Caesar Salad">
+    <h3>Caesar Salad</h3>
+  </div>
+</section>
+
+<!-- Recipe Modal -->
+<div id="recipeModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
 <footer>
-    <p>&copy; 2026 The Crafted Plate |
-        <a href="privacy.html">Privacy Policy</a>
-    </p>
+  &copy; 2026 The Crafted Plate
 </footer>
+
+<script>
+// Dropdown toggle
+function toggleDropdown() {
+  const dropdown = document.getElementById('dropdown');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Recipes with full step-by-step details
+const recipes = {
+  biryani: `
+    <img src="chicken-biryani.png.png" alt="Chicken Biryani">
+    <h3>Chicken Biryani</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>2 cups Basmati rice</li>
+      <li>500g chicken, cut into pieces</li>
+      <li>1 cup yogurt</li>
+      <li>2 onions, sliced</li>
+      <li>2 tsp garam masala</li>
+      <li>1 tsp turmeric</li>
+      <li>Saffron soaked in warm milk</li>
+      <li>4 cups water</li>
+      <li>Salt to taste</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Wash and soak rice for 30 minutes.</li>
+      <li>Marinate chicken with yogurt, turmeric, and garam masala for 1 hour.</li>
+      <li>Fry onions until golden brown; set aside.</li>
+      <li>Boil rice until 70% cooked; drain water.</li>
+      <li>Layer chicken and rice in a pot, sprinkle fried onions and saffron milk.</li>
+      <li>Cover and cook on low heat for 25–30 minutes.</li>
+      <li>Fluff gently and serve hot.</li>
+    </ol>
+  `,
+  tiramisu: `
+    <img src="tiramisu.png.png.png" alt="Tiramisu">
+    <h3>Tiramisu</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>200g ladyfingers</li>
+      <li>250g mascarpone cheese</li>
+      <li>3 eggs, separated</li>
+      <li>100g sugar</li>
+      <li>1 cup strong espresso, cooled</li>
+      <li>Cocoa powder for dusting</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Beat egg yolks with sugar until creamy; fold in mascarpone.</li>
+      <li>Whip egg whites to stiff peaks and fold into mascarpone mixture.</li>
+      <li>Dip ladyfingers in espresso briefly; layer in a dish.</li>
+      <li>Spread mascarpone cream over the layer; repeat layers.</li>
+      <li>Refrigerate for at least 4 hours.</li>
+      <li>Dust with cocoa powder before serving.</li>
+    </ol>
+  `,
+  caesar: `
+    <img src="caesar-salad.png.png" alt="Caesar Salad">
+    <h3>Caesar Salad</h3>
+    <h4>Ingredients:</h4>
+    <ul>
+      <li>1 romaine lettuce head</li>
+      <li>50g parmesan cheese, grated</li>
+      <li>100g croutons</li>
+      <li>2 cloves garlic</li>
+      <li>2 tbsp olive oil</li>
+      <li>1 egg yolk</li>
+      <li>1 tsp Dijon mustard</li>
+      <li>1 tbsp lemon juice</li>
+      <li>Salt & pepper to taste</li>
+    </ul>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Wash and chop romaine lettuce; set aside in a bowl.</li>
+      <li>In a small bowl, whisk egg yolk, mustard, lemon juice, and olive oil to make dressing.</li>
+      <li>Crush garlic and mix into dressing; season with salt and pepper.</li>
+      <li>Toss lettuce with dressing, croutons, and grated parmesan.</li>
+      <li>Serve immediately for a fresh, crisp salad.</li>
+    </ol>
+  `
+};
+
+// Modal functions
+function openModal(recipeKey){
+  document.getElementById('modal-body').innerHTML = recipes[recipeKey];
+  document.getElementById('recipeModal').style.display = 'block';
+}
+function closeModal(){ document.getElementById('recipeModal').style.display = 'none'; }
+window.onclick = function(event){ if(event.target == document.getElementById('recipeModal')) closeModal(); }
+const dropdown = document.getElementById('dropdown');
+const menuBtn = document.querySelector('nav button');
+
+// toggle menu
+function toggleDropdown() {
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// prevent closing when clicking inside menu
+dropdown.addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+
+// prevent instant close when clicking button
+menuBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+
+// CLOSE when clicking anywhere else (like modal)
+document.addEventListener('click', function() {
+  dropdown.style.display = 'none';
+});
+</script>
 
 </body>
 </html>
