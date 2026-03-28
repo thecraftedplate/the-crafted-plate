@@ -65,9 +65,84 @@ header{ display:flex; justify-content:space-between; align-items:center; padding
 nav{ position: relative; }
 nav button{ background: rgba(30,30,30,0.85); color:#f0f0f0; font-size:16px; padding:10px 20px; border:none; border-radius:12px; cursor:pointer; font-family:'Montserrat', sans-serif; }
 nav button:hover{ background: rgba(30,30,30,1); }
-nav .dropdown-content{ display:none; position:absolute; right:0; background: rgba(30,30,30,0.95); min-width:160px; border-radius:12px; overflow:hidden; margin-top:10px; box-shadow:0 5px 15px rgba(0,0,0,0.5); }
-nav .dropdown-content a{ display:block; color:#f0f0f0; text-decoration:none; padding:12px 20px; font-size:15px; transition:0.3s; }
-nav .dropdown-content a:hover{ background: rgba(50,50,50,0.9); }
+/* Overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 900;
+}
+
+/* Show overlay */
+#overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sliding Menu */
+/* Button */
+nav button{
+  background: rgba(30,30,30,0.7);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:20px;
+  cursor:pointer;
+  font-family:'Montserrat', sans-serif;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+nav button:hover{
+  background: rgba(255,255,255,0.1);
+}
+
+/* Dropdown */
+.dropdown-content{
+  position:absolute;
+  right:0;
+  top:50px;
+  background: rgba(20,20,20,0.95);
+  min-width:180px;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,0.6);
+
+  /* animation setup */
+  opacity:0;
+  transform: translateY(-10px);
+  pointer-events:none;
+  transition: all 0.25s ease;
+}
+
+/* ACTIVE STATE */
+.dropdown-content.show{
+  opacity:1;
+  transform: translateY(0);
+  pointer-events:auto;
+}
+
+/* Links */
+.dropdown-content a{
+  display:block;
+  padding:14px 18px;
+  text-decoration:none;
+  color:#eee;
+  font-size:14px;
+  transition:0.25s;
+}
+
+.dropdown-content a:hover{
+  background: rgba(255,255,255,0.08);
+  padding-left:22px;
+}
+
 
 /* Hero Section */
 .hero{ text-align:center; padding:100px 20px 60px; }
@@ -76,22 +151,361 @@ nav .dropdown-content a:hover{ background: rgba(50,50,50,0.9); }
 .hero a button{ padding:14px 32px; border:none; background:#1e1e1e; color:#f0f0f0; font-size:14px; letter-spacing:1px; cursor:pointer; transition: all 0.3s ease; border-radius:20px; }
 .hero a button:hover{ background:#333; transform: scale(1.05); }
 
-/* Recipes Section */
-.recipes{ display:flex; justify-content:center; flex-wrap:wrap; gap:30px; padding:40px 20px 60px; }
-.recipe-card{ flex:0 1 300px; background: rgba(30,30,30,0.85); border-radius:16px; cursor:pointer; overflow:hidden; transition: all 0.3s ease; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
-.recipe-card:hover{ transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.7); }
-.recipe-card img{ width:100%; height:200px; object-fit:cover; display:block; background: rgba(0,0,0,0.1); }
-.recipe-card h3{ font-family:'Cinzel', serif; font-size:22px; margin:15px 0 10px; padding:0 15px; }
+.recipes {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  padding:40px 20px 60px;
+}
 
+.recipe-card {
+  position: relative;
+  flex: 0 1 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  background: #ba780e;
+}
+.recipe-card {
+  animation: fadeUp 0.6s ease forwards;
+}
+.recipe-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* IMAGE */
+.recipe-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* DARK GRADIENT OVERLAY */
+.recipe-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+/* TITLE FLOATING */
+.recipe-card h3 {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  z-index: 2;
+  font-size: 20px;
+  font-family: 'Cinzel', serif;
+}
+
+/* HOVER EFFECT */
+.recipe-card:hover img {
+  transform: scale(1.1);
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+}
 /* Modal */
-.modal{ display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background: rgba(0,0,0,0.85); }
-.modal-content{ background: rgba(30,30,30,0.95); margin: 8% auto; padding:0; border-radius:16px; width:80%; max-width:500px; color:#f0f0f0; box-shadow:0 8px 25px rgba(0,0,0,0.7); animation: fadeIn 0.3s ease; overflow:hidden; }
-#modal-body img{ width:100%; height:220px; object-fit:cover; display:block; border-top-left-radius:16px; border-top-right-radius:16px; }
-#modal-body h3{ font-family:'Cinzel', serif; font-size:22px; margin:15px; }
-#modal-body h4{ margin-top:15px; font-size:18px; color:#ccc; padding:0 15px; }
-#modal-body ul, #modal-body ol{ margin:10px 15px 15px 30px; line-height:1.7; color:#ccc; }
-.close{ color:#f0f0f0; float:right; font-size:28px; cursor:pointer; font-weight:bold; margin:10px 20px 0 0; }
-.close:hover{ color:#ccc; }
+/* FULL SCREEN MODAL */
+.modal-content {
+  display: flex;
+  width: 95%;
+  max-width: 1200px;
+  height: 85vh;
+  margin: auto;
+  margin-top: 5vh;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(20,20,20,0.98);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {transform: translateY(60px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+
+/* LEFT SIDE IMAGE */
+.modal-left {
+  flex: 0 0 50%;
+  height: 100%;
+}
+.modal-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+  cursor: zoom-in;
+  background: black;
+}
+
+.modal-left img:active {
+  transform: scale(1.1);
+}
+
+/* RIGHT SIDE CONTENT */
+.modal-right {
+  flex: 1;                /* ✅ allows proper flex behavior */
+  min-height: 0;          /* ✅ FIXES SCROLL BUG */
+  padding: 35px;
+  overflow-y: auto;
+  line-height: 1.7;
+}
+
+/* Scrollbar */
+.modal-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-right::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+/* Scroll fade indicator */
+.modal-right::after {
+  content: "";
+  position: sticky;
+  bottom: 0;
+  height: 40px;
+  display: block;
+  background: linear-gradient(to top, rgba(20,20,20,1), transparent);
+}
+
+/* Typography */
+.modal-right h3 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.modal-right h4 {
+  margin-top: 25px;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+
+.modal-right li {
+  margin-bottom: 6px;
+}
+
+.modal-right ul, 
+.modal-right ol {
+  margin: 10px 0 15px 20px;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+/* MODAL BACKGROUND */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  animation: fadeBg 0.3s ease;
+}
+
+@keyframes fadeBg {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.6);
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+
+/* CHEF TIP */
+.chef-tip {
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  border-left: 3px solid #fff;
+  margin-top: 10px;
+}
+
+/* MODAL ANIMATION */
+.modal-content {
+  animation: modalFade 0.4s ease;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   MOBILE FIX (IMPORTANT)
+========================= */
+@media (max-width: 768px){
+
+  .modal-content {
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .modal-left {
+    height: 40%;
+  }
+
+  .modal-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-right {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(20,20,20,0.98);
+  }
+
+  .modal-right h3 {
+    font-size: 24px;
+  }
+
+  .modal-right h4 {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  .modal-right ul,
+  .modal-right ol {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* BACK BUTTON (MOBILE) */
+  .back-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-size: 14px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    padding: 10px 16px;
+    border-radius: 12px;
+  }
+
+  .back-btn:hover {
+    background: rgba(0,0,0,0.9);
+  }
+}
+
+/* RESPONSIVE CARDS */
+@media (max-width:768px){
+  .recipes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recipe-card {
+    width: 85%;
+  }
+
+  .hero h1 { font-size: 32px; }
+  .hero p { font-size: 15px; }
+}
+
+/* CATEGORY BUTTONS */
+.category-buttons button {
+  background: rgba(30,30,30,0.85);
+  color: #f0f0f0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-buttons button:hover {
+  background: rgba(50,50,50,0.9);
+}
+
+.category-buttons button.active {
+  background: #f0f0f0;
+  color: #1e1e1e;
+  font-weight: 600;
+}
+
+/* MODAL SHOW */
+.modal.show {
+  display: block;
+}
+
+/* CARD INFO */
+.card-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+
+.card-info span {
+  background: rgba(0,0,0,0.6);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* FAVORITE */
+.favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.favorite.active {
+  color: red;
+  transform: scale(1.2);
+}
 @keyframes fadeIn{ from{opacity:0; transform: scale(0.95);} to{opacity:1; transform: scale(1);} }
 
 /* Footer */
@@ -107,16 +521,17 @@ footer{ text-align:center; padding:30px; font-size:14px; color:#ccc; }
 <header>
   <div class="logo">The Crafted Plate</div>
   <nav>
-    <button onclick="toggleDropdown()">Menu &#9662;</button>
-    <div class="dropdown-content" id="dropdown">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="recipes.html">Recipes</a>
-      <a href="special.html">Special</a>
-      <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
-    </div>
-  </nav>
+  <button id="menuBtn" onclick="toggleDropdown()">Menu ▾</button>
+  <div class="dropdown-content" id="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="recipes.html">Recipes</a>
+    <a href="special.html">Special</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
+    
+  </div>
+</nav> 
 </header>
 
 <section class="hero">
@@ -126,18 +541,43 @@ footer{ text-align:center; padding:30px; font-size:14px; color:#ccc; }
 </section>
 
 <section class="recipes">
-  <div class="recipe-card" onclick="openModal('biryani')">
-    <img src="chicken-biryani.png.png" alt="Chicken Biryani">
-    <h3>Chicken Biryani</h3>
+  <!-- Chicken Wings -->
+<div class="recipe-card" data-category="meat" onclick="openModal('chicken_wings')">
+  <img src="chicken-wings.png(1).png" alt="Chicken Wings">
+
+  <div class="card-info">
+    <span>⏱ 35 min</span>
+    <span>🔥 Medium</span>
   </div>
-  <div class="recipe-card" onclick="openModal('tiramisu')">
-    <img src="tiramisu.png.png.png" alt="Tiramisu">
-    <h3>Tiramisu</h3>
+
+  <div class="favorite" onclick="toggleFavorite(event)">♡</div>
+  <h3>Chicken Wings</h3>
+</div>
+
+<!-- Caesar Salad -->
+<div class="recipe-card" data-category="vegetable" onclick="openModal('caesar_salad')">
+  <img src="caesar-salad.png.png" alt="Caesar Salad">
+
+  <div class="card-info">
+    <span>⏱ 15 min</span>
+    <span>🔥 Easy</span>
   </div>
-  <div class="recipe-card" onclick="openModal('caesar')">
-    <img src="caesar-salad.png.png" alt="Caesar Salad">
-    <h3>Caesar Salad</h3>
-  </div>
+
+  <div class="favorite" onclick="toggleFavorite(event)">♡</div>
+  <h3>Caesar Salad</h3>
+</div>
+
+
+<div class="recipe-card" data-category="dessert" onclick="openModal('spongecake')">
+    <img src="spongecake.png.png.png" alt="Sponge Cake">
+    <div class="card-info">
+        <span>⏱ 1 hr</span>
+        <span>🔥 Medium</span>
+    </div>
+    <h3>Sponge Cake</h3>
+     <div class="favorite" onclick="toggleFavorite(event)">♡</div>
+</div>
+
 </section>
 
 <!-- Recipe Modal -->
@@ -161,55 +601,77 @@ function toggleDropdown() {
 
 // Recipes with full step-by-step details
 const recipes = {
-  biryani: `
-    <img src="chicken-biryani.png.png" alt="Chicken Biryani">
-    <h3>Chicken Biryani</h3>
-    <h4>Ingredients:</h4>
-    <ul>
-      <li>2 cups Basmati rice</li>
-      <li>500g chicken, cut into pieces</li>
-      <li>1 cup yogurt</li>
-      <li>2 onions, sliced</li>
-      <li>2 tsp garam masala</li>
-      <li>1 tsp turmeric</li>
-      <li>Saffron soaked in warm milk</li>
-      <li>4 cups water</li>
-      <li>Salt to taste</li>
-    </ul>
-    <h4>Instructions:</h4>
-    <ol>
-      <li>Wash and soak rice for 30 minutes.</li>
-      <li>Marinate chicken with yogurt, turmeric, and garam masala for 1 hour.</li>
-      <li>Fry onions until golden brown; set aside.</li>
-      <li>Boil rice until 70% cooked; drain water.</li>
-      <li>Layer chicken and rice in a pot, sprinkle fried onions and saffron milk.</li>
-      <li>Cover and cook on low heat for 25–30 minutes.</li>
-      <li>Fluff gently and serve hot.</li>
-    </ol>
-  `,
-  tiramisu: `
-    <img src="tiramisu.png.png.png" alt="Tiramisu">
-    <h3>Tiramisu</h3>
-    <h4>Ingredients:</h4>
-    <ul>
-      <li>200g ladyfingers</li>
-      <li>250g mascarpone cheese</li>
-      <li>3 eggs, separated</li>
-      <li>100g sugar</li>
-      <li>1 cup strong espresso, cooled</li>
-      <li>Cocoa powder for dusting</li>
-    </ul>
-    <h4>Instructions:</h4>
-    <ol>
-      <li>Beat egg yolks with sugar until creamy; fold in mascarpone.</li>
-      <li>Whip egg whites to stiff peaks and fold into mascarpone mixture.</li>
-      <li>Dip ladyfingers in espresso briefly; layer in a dish.</li>
-      <li>Spread mascarpone cream over the layer; repeat layers.</li>
-      <li>Refrigerate for at least 4 hours.</li>
-      <li>Dust with cocoa powder before serving.</li>
-    </ol>
-  `,
-  caesar: `
+ chicken_wings: `
+<img src="chicken-wings.png(1).png">
+<h3>Sticky Honey Garlic Chicken Wings</h3>
+
+<h4>Ingredients:</h4>
+<ul>
+<li>1kg chicken wings</li>
+<li>2 tbsp soy sauce</li>
+<li>3 tbsp honey</li>
+<li>2 cloves garlic (minced)</li>
+<li>1 tsp ginger (grated)</li>
+<li>1 tsp chili flakes</li>
+</ul>
+
+<h4>Instructions:</h4>
+<ol>
+<li>Pat wings dry (crispy skin secret).</li>
+<li>Bake at 200°C for 25 minutes.</li>
+<li>Meanwhile simmer sauce ingredients until thick.</li>
+<li>Toss wings in sauce and return to oven 10 minutes.</li>
+</ol>
+
+<h4>Chef Tips:</h4>
+<ul>
+<li>Dry wings = crispy skin</li>
+<li>Double bake = extra crunch</li>
+<li>Add cornstarch coating for even crispier texture</li>
+</ul>
+
+<h4>Presentation:</h4>
+<ul>
+<li>Sprinkle sesame seeds + spring onions</li>
+</ul>
+`,
+
+
+spongecake: `
+
+<img src="spongecake.png.png.png" alt="Sponge Cake">
+<h3>Classic Sponge Cake</h3>
+
+<p><strong>Time:</strong> 40 mins | <strong>Servings:</strong> 6 | <strong>Difficulty:</strong> Medium</p>
+
+<h4>Ingredients:</h4>
+<ul>
+  <li>4 large eggs (room temperature)</li>
+  <li>120g caster sugar</li>
+  <li>120g all-purpose flour (sifted)</li>
+  <li>1 tsp vanilla extract</li>
+  <li>Pinch of salt</li>
+</ul>
+
+<h4>Instructions:</h4>
+<ol>
+  <li>Preheat oven to <strong>180°C (350°F)</strong>. Line a cake tin with parchment.</li>
+  <li>Whisk eggs and sugar for 8–10 minutes until pale, thick, and tripled in volume.</li>
+  <li>Gently fold in sifted flour in batches to retain air.</li>
+  <li>Add vanilla and fold carefully.</li>
+  <li>Pour into tin and bake for <strong>25–30 minutes</strong> until golden and springy.</li>
+  <li>Cool completely before slicing.</li>
+</ol>
+
+<h4>Chef Tips:</h4>
+<ul>
+  <li>Do NOT overmix — this keeps the cake airy.</li>
+  <li>Tap tin lightly to remove large air pockets only.</li>
+</ul>
+`,
+
+
+  caesar_salad: `
     <img src="caesar-salad.png.png" alt="Caesar Salad">
     <h3>Caesar Salad</h3>
     <h4>Ingredients:</h4>
@@ -235,14 +697,115 @@ const recipes = {
   `
 };
 
-// Modal functions
-function openModal(recipeKey){
-  document.getElementById('modal-body').innerHTML = recipes[recipeKey];
-  document.getElementById('recipeModal').style.display = 'block';
+// ELEMENTS
+// =========================
+const modal = document.getElementById("recipeModal");
+const modalBody = document.getElementById("modal-body");
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+
+
+// =========================
+// OPEN MODAL
+// =========================
+window.openModal = function(recipeKey) {
+
+  const raw = recipes[recipeKey];
+
+  if (!raw) {
+    modalBody.innerHTML = "<p style='padding:20px;'>Recipe not found.</p>";
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  const temp = document.createElement("div");
+  temp.innerHTML = raw;
+
+  // Extract image
+  const imgEl = temp.querySelector("img");
+  const imgHTML = imgEl ? imgEl.outerHTML : "";
+
+  if (imgEl) imgEl.remove();
+
+  modalBody.innerHTML = `
+    <div class="modal-content">
+      
+      <div class="modal-left">
+        ${imgHTML}
+      </div>
+
+      <div class="modal-right">
+        <div class="back-btn" onclick="closeModal()">← Back</div>
+        ${temp.innerHTML}
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+};
+
+
+// =========================
+// CLOSE MODAL
+// =========================
+window.closeModal = function() {
+  modal.classList.remove("show");
+  document.body.style.overflow = "auto";
+};
+
+
+
+
+
+// Filter recipes by category & highlight active button
+function filterCategory(category) {
+  const cards = document.querySelectorAll('.recipe-card');
+  const buttons = document.querySelectorAll('.category-buttons button');
+
+  cards.forEach(card => {
+    if(category === 'all' || card.dataset.category === category){
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Highlight active button
+  buttons.forEach(btn => {
+    if(btn.textContent.toLowerCase() === category || (category === 'all' && btn.textContent.toLowerCase() === 'all')){
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
 }
-function closeModal(){ document.getElementById('recipeModal').style.display = 'none'; }
-window.onclick = function(event){ if(event.target == document.getElementById('recipeModal')) closeModal(); }
+// Real-time search
+const searchInput = document.getElementById('recipeSearch');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  const cards = document.querySelectorAll('.recipe-card');
+
+  cards.forEach(card => {
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    if(title.includes(query)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+
+// Set "All" as default active
+filterCategory('all');
+
+
+
 </script>
+
 
 </body>
 </html>
