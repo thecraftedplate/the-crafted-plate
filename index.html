@@ -802,6 +802,34 @@ searchInput.addEventListener('input', function() {
     }
   });
 });
+  
+// =========================
+// DROPDOWN MENU TOGGLE
+// =========================
+function toggleDropdown() {
+  if (menu) menu.classList.toggle("show");
+}
+
+
+// =========================
+// MENU BUTTON CLICK
+// =========================
+if (menuBtn) {
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleDropdown();
+  });
+}
+
+
+// =========================
+// CLOSE DROPDOWN ON OUTSIDE CLICK
+// =========================
+window.addEventListener("click", (e) => {
+  if (menu && menuBtn && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+    menu.classList.remove("show");
+  }
+});
 
 // Set "All" as default active
 filterCategory('all');
